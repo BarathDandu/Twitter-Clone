@@ -12,22 +12,22 @@
     //echo $_POST['picloc'];
     //echo "<br>";
 
-if(array_key_exists("picloc", $_POST) && $_POST['picloc']){
-    $pic .= $_POST['picloc'];
-}else{
-    $pic .= "/p/images/userIcon.png";
-}
+    if(array_key_exists("picloc", $_POST) && $_POST['picloc']){
+        $pic .= $_POST['picloc'];
+    }else{
+        $pic .= "/p/images/userIcon.png";
+    }
 
     if(array_key_exists("email", $_SESSION) && $_SESSION['email']){
         
         $link = mysqli_connect("sdb-g.hosting.stackcp.net", "userDatabase-31383520f7", "fall2018", "userDatabase-31383520f7");
         if(mysqli_connect_error()){
             die("Error connecting to Database");
-        }  
+        }
         
         if($_POST['sub']=='sb'){
                     
-            $query = "SELECT `id` FROM `twitter` WHERE username = '".mysqli_real_escape_string($link, $_POST['username'])."'";
+            $query = "SELECT `id` FROM `twitter` WHERE username = '".mysqli_real_escape_string($link, strtolower($_POST['username']))."'";
 
             $result = mysqli_query($link, $query);
             
@@ -38,7 +38,7 @@ if(array_key_exists("picloc", $_POST) && $_POST['picloc']){
             }else{
             
                 
-                $query = "UPDATE `twitter` SET `username`= '".mysqli_real_escape_string($link, $_POST['username'])."',`piclocation`= '".$_POST['picloc']."' WHERE email = '".$_SESSION['email']."' LIMIT 1";
+                $query = "UPDATE `twitter` SET `username`= '".mysqli_real_escape_string($link, strtolower($_POST['username']))."',`piclocation`= '".$_POST['picloc']."' WHERE email = '".$_SESSION['email']."' LIMIT 1";
                 
                 //echo $query;
                 
@@ -56,7 +56,10 @@ if(array_key_exists("picloc", $_POST) && $_POST['picloc']){
                 }
             }
         }
-    }
+    }else{
+             header("Location: http://barathdandu-com.stackstaging.com/p/welcome.php/"); 
+             exit();
+        }  
 ?>
 
 <!DOCTYPE html>
@@ -274,6 +277,7 @@ if(array_key_exists("picloc", $_POST) && $_POST['picloc']){
     $("#signupbtn").click(function(e){
         
         var strrr = $("#username").val();
+        
         if( strrr.indexOf(" ") !== -1 )
         {
             e.preventDefault();

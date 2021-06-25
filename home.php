@@ -1,19 +1,3 @@
-<?php
-
-   if($_GET['name']=='lauda'){
-       
-        unset($_SESSION);
-
-        setcookie("email", "", time() - 60 * 60);
-
-        $_COOKIE['email'] = "";
-       
-        header("Location: http://barathdandu-com.stackstaging.com/p/welcome.php");  
-        exit();
-   }
-
-?>
-
 <!doctype html>
 <html lang="en">
   <head>
@@ -253,7 +237,7 @@
               background-color:#1DA1F2; 
                border-radius: 40px;
               padding: 1vh 2vh ;              
-              margin: 0vh;
+              margin-top: 0.75vh;
               display: inline-block;
               float:left;
               color: #fff;
@@ -289,8 +273,8 @@
               resize: none;
               color: #fff;
               outline: none;
-            
-            
+              color:#fff;
+              font-size: 1.1vw;
           }
           #mediaicon{
                height: 2vh;
@@ -303,12 +287,40 @@
             }
 
           #mediainserted{
-              max-width:85%;
-              max-height: 48%;
-              margin: 1vh;
-              border-radius: 20px;
-              float:right;
+             width: 100%;
+             position: relative;
             }
+          
+            .imgclose{
+              position: absolute;
+                z-index: 100;
+              color: #fff;
+              font-size: 1.5vw;
+              margin:0 0 0 1vh;
+                  padding: 0;
+              float: left;
+                height: 0;
+                text-shadow: 0 0 10px #000;
+                display: none;
+          }
+          
+          [contenteditable=true]:empty:before{
+              content: attr(placeholder);
+              pointer-events: none;
+              display: block; /* For Firefox */
+              color:#6E767D;
+            }
+          .editimage{
+              border: 1px solid #fff;
+                color:#fff;
+                padding: 0.25vh 1vh;
+                position: absolute;
+                z-index: 100;
+                margin: 0;
+                right:2.5vh;
+                bottom: 6.3vh;
+                
+          }
           
       </style>
       
@@ -375,13 +387,13 @@
         
                   <a class = "foote popover-dismiss" data-html='true' tabindex="0" data-toggle="popover" data-placement="top"  
                      data-content="<a class = 'logoutpopover texx' href='http://barathdandu-com.stackstaging.com/p/home.php?name=lauda'>Log Out</a>.">      
-                      <img class = "profilepicleft" src="/p/images/userIcon.png" > 
+                      <img class = "profilepicleft" src="http://barathdandu-com.stackstaging.com/p/images/userIcon.png" > 
                       <div class = "data">
                        <span class="name"> Barath Dandu</span> 
                        <span class="usernametext"> @barathdandu</span> 
                       </div>
-                          <img class = "treedots" src="/p/images/treedotswhitelogo.png" > 
-                          <img class = "treedots hovlogo" src="/p/images/tdh.png" >   
+                          <img class = "treedots" src="http://barathdandu-com.stackstaging.com/p/images/treedotswhitelogo.png" > 
+                          <img class = "treedots hovlogo" src="http://barathdandu-com.stackstaging.com/p/images/tdh.png" >   
                 </a>
             </div>
             
@@ -398,16 +410,18 @@
                   <div class="modal-body" >
                      
                       <div style = "height:100%; width:10%; float:left;">
-                            <img class = "profilepictweet" src="/p/images/userIcon.png" > 
+                            <img class = "profilepictweet" src="http://barathdandu-com.stackstaging.com/p/images/userIcon.png" > 
                       </div>
                       <div id = "te" style = "float:left; width:90%;height:auto;">
-                         <span class="textarea" role="textbox" contenteditable placeholder="Remember, be nice!"></span>
+                         <span class="textarea" role="textbox" contenteditable="true" placeholder="What's happening?"></span>
                       </div>
-                      
+                      <div id = "mediadiv"style ="width:87%; float:right;overflow:hidden; margin: 1vh;border-radius: 20px;" >
+                            <button  type="button" class="imgclose"><span >&times;  </span></button>
                           <img id="mediainserted" src=""  >
-                        
+                          <button  type="button" class="editimage logodiv"><span >Edit</span></button>
+                      </div>
                     
-                      <div class = "modalfooter" style = "float:right; width:90%;height:auto;margin:0; ">
+                      <div class = "modalfooter" style = "float:right; width:90%;height:auto;margin:0;border-top: 1px solid #2F3336;">
                             
                             <label for = "fileinp" class = "logodiv" id = "insrtpht">  
                                 <img id = "mediaicon" src="http://barathdandu-com.stackstaging.com/p/images/insertmedia.png" alt="Twitter">
@@ -434,13 +448,49 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
 
     <script >
+        
         fileinp.onchange = evt => {
           const [file] = fileinp.files
           if (file) {
-            mediainserted.src = URL.createObjectURL(file)
+              $(".imgclose").show();
+            mediainserted.src = URL.createObjectURL(file);
+            mediainserted.onload = function(){
+                tweetmediaheight = this.height;
+                setheight(tweetmediaheight);
+            }
           }
         }
 
+        $(window).resize(function() {
+            const [file] = fileinp.files
+            if (file) {
+                    tweetmediaheight = mediainserted.height;
+                    setheight(tweetmediaheight);               
+                 
+            }
+        });
+
+        function setheight(tweetmediaheight) {
+            var div = $('#mediadiv');
+            var width = div.width();
+            var newheight = (width * 9/16);
+            if(tweetmediaheight > newheight ){
+                $('#mediadiv').height(newheight);
+            }else{
+                $('#mediadiv').height(tweetmediaheight);
+            }
+        };
+
+        $(".imgclose").click(function(){
+            mediainserted.src = "";
+            $(".imgclose").hide();
+            $('#mediadiv').height(0);
+            fileinp.val();
+        });
+
+        $(".editimage").click(function(){
+           
+        });
      
         $(".left-col").hover(function(){
            $(this).children('img:nth(0)').hide();
