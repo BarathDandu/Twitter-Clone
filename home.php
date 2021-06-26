@@ -3,15 +3,12 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+    
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@600&display=swap" rel="stylesheet">
-
-      
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@600&display=swap" rel="stylesheet">      
     <link rel="icon" href="http://barathdandu-com.stackstaging.com/p/images/Bluelogo.png">		
 
     <title>Twitter Home</title>
-      
       
       <style type="text/css">
       
@@ -59,7 +56,6 @@
               border-radius: 40px;
               padding: 1vh 3vh 1vh 1vh;
               margin-top: 0.5vh;
-              display: inline-block;
               clear:both;
               float:left;
           } 
@@ -73,7 +69,6 @@
               border-radius: 40px;
               padding: 1vh 0 1vh 1vh;
               margin-right: 5vh;
-              display: inline-block;
               background-color: #000;
                clear:both;
               float:left;
@@ -114,7 +109,6 @@
                border-radius: 40px;
               padding: 1.2vh 9vh ;              
               margin-top: 1.5vh;
-              display: inline-block;
               clear:both;
               float:left;
              
@@ -201,7 +195,6 @@
                border-radius: 40px;
               padding: 1vh 4vh ;              
               margin: 1.5vh 1.5vh 2vh 1.5vh;
-              display: inline-block;
               clear:both;
               float:left;
               color: #fff;
@@ -213,8 +206,7 @@
           }
           
           #tweetmodal{
-                background-color:rgba(36,45,52, 0.75); 
-                
+                background-color:rgba(36,45,52, 0.75);                 
           }
           .modal-backdrop.show {
                 opacity: 0;
@@ -233,19 +225,18 @@
                 border-bottom-color: #2F3336;
               padding: 0;
           }
-        .tweetmodal{
+        .tweetmodalbtn{
               background-color:#1DA1F2; 
                border-radius: 40px;
               padding: 1vh 2vh ;              
               margin-top: 0.75vh;
-              display: inline-block;
-              float:left;
               color: #fff;
             float: right;
           }
           .modal-lg {
               margin-top: 5.5vh;
                 max-width: 33%;
+                min-width: 33%;
               height: auto;
             }
               .modalclose {
@@ -312,14 +303,15 @@
             }
           .editimage{
               border: 1px solid #fff;
+              background-color: rgba(0, 0, 0, 0.5);
                 color:#fff;
                 padding: 0.25vh 1vh;
                 position: absolute;
                 z-index: 100;
                 margin: 0;
                 right:2.5vh;
-                bottom: 6.3vh;
-                
+                bottom: 7.3vh;
+                display: none;
           }
           
       </style>
@@ -407,36 +399,45 @@
                       <span >&times;</span>
                     </button>
                   </div>
-                  <div class="modal-body" >
-                     
-                      <div style = "height:100%; width:10%; float:left;">
-                            <img class = "profilepictweet" src="http://barathdandu-com.stackstaging.com/p/images/userIcon.png" > 
-                      </div>
-                      <div id = "te" style = "float:left; width:90%;height:auto;">
-                         <span class="textarea" role="textbox" contenteditable="true" placeholder="What's happening?"></span>
-                      </div>
-                      <div id = "mediadiv"style ="width:87%; float:right;overflow:hidden; margin: 1vh;border-radius: 20px;" >
-                            <button  type="button" class="imgclose"><span >&times;  </span></button>
-                          <img id="mediainserted" src=""  >
-                          <button  type="button" class="editimage logodiv"><span >Edit</span></button>
-                      </div>
-                    
-                      <div class = "modalfooter" style = "float:right; width:90%;height:auto;margin:0;border-top: 1px solid #2F3336;">
+                    <div class="modal-body" >
+                        <div id = "modalpage1">
+                            <div style = "height:100%; width:10%; float:left;">
+                                    <img class = "profilepictweet" src="http://barathdandu-com.stackstaging.com/p/images/userIcon.png" > 
+                            </div>
+                            <div id = "te" style = "float:left; width:90%;height:auto;">
+                                <span class="textarea" role="textbox" contenteditable="true" placeholder="What's happening?"></span>
+                            </div>
+                            <div class = "mediadiv"style ="width:87%; float:right;overflow:hidden; margin: 1vh;border-radius: 20px;" >
+                                    <button  type="button" class="imgclose"><span >&times;  </span></button>
+                                <img id="mediainserted" src=""  >
+                                <button  type="button" class="editimage logodiv"><span >Edit</span></button>
+                            </div>
                             
-                            <label for = "fileinp" class = "logodiv" id = "insrtpht">  
-                                <img id = "mediaicon" src="http://barathdandu-com.stackstaging.com/p/images/insertmedia.png" alt="Twitter">
-                            </label>
-                            <input id="fileinp" type="file" accept="image/png, image/gif, image/jpeg" >
+                            <div class = "modalfooter" style = "float:right; width:90%;height:auto;margin:0.5vh;border-top: 1px solid #2F3336;">
+                                    <label for = "fileinp" class = "logodiv" id = "insrtpht">  
+                                        <img id = "mediaicon" src="http://barathdandu-com.stackstaging.com/p/images/insertmedia.png" alt="Twitter">
+                                    </label>
+                                    <input id="fileinp" type="file" accept="image/png, image/gif, image/jpeg" name = "fileinp">
 
-                            <button type="button" class="tweetmodal texx">Tweet</button>
-                      </div>
-                  </div>
-                 
+                                    <button type="button" class="tweetmodalbtn texx">Tweet</button>
+                            </div>
+                        </div>
+                        <div id = "modalpage2" style = "display: none;">
+                            <div class = "editdiv" style ="width:95%; height: 28vh;float:right;overflow:hidden; margin:1vh;border-radius: 20px;">
+                                <span id = "h" ></span>
+                            </div>
+                            <div class = "modalfooter" style = "float:right; width:90%;height:auto;margin:0.5vh;border-top: 1px solid #2F3336;">
+                                <button id = "editcancel" type="button" class="tweetmodalbtn texx" style = "margin-left:1vh; background-color: #6E767D;">Cancel</button>
+                                <button type="button" class="tweetmodalbtn texx">Save</button>
+
+                            </div>
+                        </div>
+                    </div>
                 </div>
               </div>
             </div>
               
-              
+
               
               </div>
             <div class="col-5">col-5</div>
@@ -444,52 +445,82 @@
             </div>
         </div>
     
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.js"></script>
+    <link href="crop.css" rel="stylesheet"/>
 
-    <script >
+    <script>
         
+        $(document).ready(function(){
+            $image_crop = $('#h').croppie({
+            enableExif: true,
+            enableResize: true,
+            viewport: {
+                width:355,
+                height:200,
+                type:'square'
+            }
+            });
+        $(".editimage").click(function(){
+            $("#modalpage1").hide();
+            $("#modalpage2").show();
+            var reader = new FileReader();
+            reader.onload = function (event) {
+             $image_crop.croppie('bind', {
+               url: event.target.result
+             }).then(function(){
+               console.log('jQuery bind complete');
+             });
+           }
+           reader.readAsDataURL(fileinp.files[0]);
+            });
+
+        });
+
         fileinp.onchange = evt => {
           const [file] = fileinp.files
           if (file) {
               $(".imgclose").show();
+              $(".editimage").show();
             mediainserted.src = URL.createObjectURL(file);
             mediainserted.onload = function(){
-                tweetmediaheight = this.height;
-                setheight(tweetmediaheight);
-            }
+                setheight();
+            } 
           }
         }
 
         $(window).resize(function() {
-            const [file] = fileinp.files
-            if (file) {
-                    tweetmediaheight = mediainserted.height;
-                    setheight(tweetmediaheight);               
-                 
-            }
+            setheight();                
         });
 
-        function setheight(tweetmediaheight) {
-            var div = $('#mediadiv');
+        function setheight() {
+            const [file] = fileinp.files
+            if (file) {
+                tweetmediaheight = mediainserted.height;
+            }
+            var div = $('.mediadiv');
             var width = div.width();
             var newheight = (width * 9/16);
             if(tweetmediaheight > newheight ){
-                $('#mediadiv').height(newheight);
+                $('.mediadiv').height(newheight);
+                $('.editdiv').height(newheight);
             }else{
-                $('#mediadiv').height(tweetmediaheight);
+                $('.mediadiv').height(tweetmediaheight);
+                $('.editdiv').height(tweetmediaheight);
             }
         };
+
+        $("#editcancel").click(function(){
+            $("#modalpage2").hide();
+            $("#modalpage1").show();
+        });
 
         $(".imgclose").click(function(){
             mediainserted.src = "";
             $(".imgclose").hide();
-            $('#mediadiv').height(0);
-            fileinp.val();
-        });
-
-        $(".editimage").click(function(){
-           
+            $(".editimage").hide();
+            $('.mediadiv').height(0);
         });
      
         $(".left-col").hover(function(){
@@ -519,7 +550,6 @@
                     (this.scrollHeight) + 'px';
         });
      
-
         $(document).on("click", "#funcid", function () {
             $(this).parents(".popover").popover('hide');
         });
