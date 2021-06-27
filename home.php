@@ -391,7 +391,7 @@
             
                 
             <!-- Modal -->
-            <div class="modal fade" id="tweetmodal" tabindex="-1" >
+            <div class="modal" id="tweetmodal" tabindex="-1" >
               <div class="modal-dialog modal-lg">
                 <div class="modal-content   ">
                   <div class="modal-header">
@@ -428,7 +428,7 @@
                             </div>
                             <div class = "modalfooter" style = "float:right; width:90%;height:auto;margin:0.5vh;border-top: 1px solid #2F3336;">
                                 <button id = "editcancel" type="button" class="tweetmodalbtn texx" style = "margin-left:1vh; background-color: #6E767D;">Cancel</button>
-                                <button type="button" class="tweetmodalbtn texx">Save</button>
+                                <button id = "saveedit" type="button" class="tweetmodalbtn texx">Save</button>
 
                             </div>
                         </div>
@@ -476,6 +476,21 @@
            reader.readAsDataURL(fileinp.files[0]);
             });
 
+            $("#saveedit").click(function(event){
+                $image_crop.croppie('result', {
+                    type: 'canvas',
+                    size:'original',
+                    format: 'jpeg',
+                    quality: '1',
+                    circle: 'false'
+                }).then(function(response){
+                    //console.log(response);
+                    mediainserted.src = response;
+                    $("#modalpage2").hide();
+                    $("#modalpage1").show();
+                });
+            });
+
         });
 
         fileinp.onchange = evt => {
@@ -498,16 +513,16 @@
             const [file] = fileinp.files
             if (file) {
                 tweetmediaheight = mediainserted.height;
-            }
-            var div = $('.mediadiv');
-            var width = div.width();
-            var newheight = (width * 9/16);
-            if(tweetmediaheight > newheight ){
-                $('.mediadiv').height(newheight);
-                $('.editdiv').height(newheight);
-            }else{
-                $('.mediadiv').height(tweetmediaheight);
-                $('.editdiv').height(tweetmediaheight);
+                var div = $('.mediadiv');
+                var width = div.width();
+                var newheight = (width * 9/16);
+                if(tweetmediaheight > newheight ){
+                    $('.mediadiv').height(newheight);
+                    $('.editdiv').height(newheight);
+                }else{
+                    $('.mediadiv').height(tweetmediaheight);
+                    $('.editdiv').height(tweetmediaheight);
+                }
             }
         };
 
