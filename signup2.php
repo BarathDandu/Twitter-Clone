@@ -233,6 +233,8 @@
 
     <script>
 
+    //t1 = window.setTimeout(function(){ window.location = "http://barathdandu-com.stackstaging.com/p/home.php"; },3000);
+
     $("#signupbtn").click(function(e){
        
         var nameerror;
@@ -290,6 +292,11 @@
                         $("#phpresult").html(data);
                         $("#processing").hide();
                         //console.log(data);
+                        if ($.trim(data) === "<div class='alert alert-success' role='alert'>You have been signed up!<br></div>") {
+                            setTimeout(function() {
+                                window.location.href = "http://barathdandu-com.stackstaging.com/p/home.php/";
+                            }, 1000);
+                        }
                     },
                     error: function(xhr, status, error) {
                         var err = eval("(" + xhr.responseText + ")");
@@ -318,8 +325,13 @@
                         success:function(data)
                         {
                             $("#phpresult").html(data);
-                            $("#processing").hide();
+                            $("#processing").hide();                            
                             //console.log(data);
+                            if ($.trim(data) === "<div class='alert alert-success' role='alert'>You have been signed up!<br></div>") {
+                            setTimeout(function() {
+                                window.location.href = "http://barathdandu-com.stackstaging.com/p/home.php/";
+                            }, 1000);
+                        }
                         },
                         error: function(xhr, status, error) {
                             var err = eval("(" + xhr.responseText + ")");

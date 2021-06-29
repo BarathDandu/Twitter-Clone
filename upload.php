@@ -48,7 +48,7 @@ if(array_key_exists("email", $_SESSION) && $_SESSION['email']){
                     //echo $query;
                     
                     if(mysqli_query($link, $query)){
-                        echo "<div class='alert alert-success' role='alert'>You have been signed up!<br></div>";
+                        echo"<div class='alert alert-success' role='alert'>You have been signed up!<br></div>";
                     }
                     else{
                         echo "<div class='alert alert-danger' role='alert'>There was an error signing you up.<br> Please try again later</div>";
