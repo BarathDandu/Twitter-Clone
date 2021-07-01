@@ -190,7 +190,10 @@
                     Please enter your name.
                 </div>
                 <div id = "nw" class="invalid-feedback">
-                    Please enter your name without special characters.
+                    Please enter your name without special characters or numbers.
+                </div>
+                <div id = "nlen" class="invalid-feedback">
+                    Please enter a username that does not exceed 10 characters.
                 </div>
                 <label style="text-align:left;margin-top:1vh;" for="username">Username:</label>
                 <input type="text" class="form-control" id="username" name = "username" placeholder="Username" >
@@ -199,6 +202,9 @@
                 </div>
                 <div id = "unw" class="invalid-feedback">
                     Please enter a username without white space or special characters.
+                </div>
+                <div id = "unlen" class="invalid-feedback">
+                    Please enter a username that does not exceed 13 characters.
                 </div>
                 <button id = "signupbtn" class = "texx" type="submit" class="btn btn-primary" name = "sub" Value = "sb">Sign Up</button>
             </form>
@@ -236,52 +242,74 @@
     //t1 = window.setTimeout(function(){ window.location = "http://barathdandu-com.stackstaging.com/p/home.php"; },3000);
 
     $("#signupbtn").click(function(e){
+
+        e.preventDefault();
+
+        $("#phpresult").hide();
        
         var nameerror;
         var usernameerror;        
 
         if( $("#username").val() == "" ){
             usernameerror = 1;
-            e.preventDefault();
             $("#un").css("display", "block");
             $("#unw").css("display", "none");
+            $("#unlen").css("display", "none");
         }else{
-            usernameerror = 0;
-            $("#un").css("display", "none");
 
-            if (/^[A-Za-z0-9]+$/.test( $("#username").val())) {
-                usernameerror = 0;
+            if($("#username").val().length > 13){
+                usernameerror = 1;
+                $("#unlen").css("display", "block");
+                $("#un").css("display", "none");
                 $("#unw").css("display", "none");
             }else{
-                usernameerror = 1;
-                e.preventDefault();
-                $("#unw").css("display", "block");
+
+                if (/^[A-Za-z0-9]+$/.test( $("#username").val())) {
+                    usernameerror = 0;
+                    $("#unw").css("display", "none");
+                    $("#unlen").css("display", "none");
+                    $("#un").css("display", "none");
+                }else{
+                    usernameerror = 1;
+                    $("#unw").css("display", "block");
+                    $("#unlen").css("display", "none");
+                    $("#un").css("display", "none");
+                }
             }
         }
         
         if(  $("#name").val() == "" ){
             nameerror = 1;  
-            e.preventDefault();
             $("#n").css("display", "block");
             $("#nw").css("display", "none");
-
+            $("#nlen").css("display", "none");
         }else{
-            nameerror = 0;
-            $("#n").css("display", "none");
 
-            if (/^([a-zA-Z]+\s)*[a-zA-Z]+$/.test($("#name").val()) ) {
-                nameerror = 0;
+            if($("#name").val().length > 10){
+                nameerror = 1;
+                $("#nlen").css("display", "block");
+                $("#n").css("display", "none");
                 $("#nw").css("display", "none");
             }else{
-                nameerror = 1;
-                e.preventDefault();
-                $("#nw").css("display", "block");
+
+                if (/^([a-zA-Z]+\s)*[a-zA-Z]+$/.test($("#name").val()) ) {
+                    nameerror = 0;
+                    $("#nw").css("display", "none");
+                    $("#nlen").css("display", "none");
+                    $("#n").css("display", "none");
+                }else{
+                    nameerror = 1;
+                    $("#nw").css("display", "block");
+                    $("#nlen").css("display", "none");
+                    $("#n").css("display", "none");
+                }
             }
+
+            
         }
 
         if(nameerror == 0  && usernameerror == 0){
             $("#processing").show();
-            e.preventDefault();
             if(uploaded_image.src == "http://barathdandu-com.stackstaging.com/p/images/userIcon.png"){
                 $.ajax({
                     url:'http://barathdandu-com.stackstaging.com/p/upload.php/',
@@ -290,6 +318,7 @@
                     success:function(data)
                     {
                         $("#phpresult").html(data);
+                        $("#phpresult").show();
                         $("#processing").hide();
                         //console.log(data);
                         if ($.trim(data) === "<div class='alert alert-success' role='alert'>You have been signed up!<br></div>") {
@@ -325,6 +354,7 @@
                         success:function(data)
                         {
                             $("#phpresult").html(data);
+                            $("#phpresult").show();
                             $("#processing").hide();                            
                             //console.log(data);
                             if ($.trim(data) === "<div class='alert alert-success' role='alert'>You have been signed up!<br></div>") {

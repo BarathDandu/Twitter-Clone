@@ -1,6 +1,58 @@
+<?php
+
+$piclocation = '';
+$username = '';
+$name = '';
+
+if($_GET['name']=='lauda'){
+
+    unset($_SESSION);
+
+    setcookie("email", "", time() - 60 * 60);
+
+    $_COOKIE['email'] = "";
+
+    header("Location: http://barathdandu-com.stackstaging.com/p/welcome.php/"); 
+    exit();
+
+}else{
+
+    if(array_key_exists("email", $_COOKIE) && $_COOKIE['email']){
+        session_start();
+        $_SESSION['email'] = $_COOKIE['email'];
+    }
+    
+    session_start();
+
+    if(array_key_exists("email", $_SESSION) && $_SESSION['email']){           
+
+        $link = mysqli_connect("sdb-g.hosting.stackcp.net", "userDatabase-31383520f7", "fall2018", "userDatabase-31383520f7");
+        if(mysqli_connect_error()){
+            echo "<div class='alert alert-danger' role='alert'>Error connecting to Database<br></div>";
+            die("Error connecting to Database");
+        }
+    
+        $query = "SELECT `name`, `username`, `piclocation` FROM `twitter` WHERE email = '".mysqli_real_escape_string($link, $_SESSION['email'])."' LIMIT 1";
+    
+        $row = mysqli_fetch_array(mysqli_query($link, $query));
+    
+        $piclocation .= $row['piclocation'];
+
+        $username .= '@'.$row['username'];
+
+        $name .= $row['name'];
+            
+    }else{
+        header("Location: http://barathdandu-com.stackstaging.com/p/welcome.php/"); 
+        exit();
+    }
+}
+
+?>
 <!doctype html>
 <html lang="en">
-  <head>
+<head>
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
@@ -10,470 +62,494 @@
 
     <title>Twitter Home</title>
       
-      <style type="text/css">
+    <style type="text/css">
       
-          body, html{
-              margin: 0;
-              padding: 0;
-          }
+    body, html{
+        margin: 0;
+        padding: 0;
+    }
         
-          body{
-              color: white;
-              background-color: #000000;
-          }
+    body{
+        color: white;
+        background-color: #000000;
+    }
           
-          input, button, submit { border:none; } 
+    input, button, submit { border:none; } 
           
-          .tex{
-            font-family: 'Work Sans', sans-serif;    
-            font-weight: 900;
-            font-size: 1.1vw;
-            color: #D9D9D9;
-          }
-          .texx{
-            font-family: 'Work Sans', sans-serif;    
-            font-weight: 900;
-            font-size: 0.8vw;
-            color: #fff;
-          }    
-       
-           
-          .col-4{
-                border: 1px solid #cccccc;
-              height: 100vh;
-              padding: 0;          
-          }
-          .col-3{
-                border: 1px solid #cccccc;
-              height: 100vh;
-              padding: 0;
-          }.col-5{
-              border: 1px solid #cccccc;
-              height: 100vh;
-              padding: 0;
-          }
-          .left-col{
-              border-radius: 40px;
-              padding: 1vh 3vh 1vh 1vh;
-              margin-top: 0.5vh;
-              clear:both;
-              float:left;
-          } 
-          
-          .left-col:hover{
-              background: rgba(29, 161, 242, .1) ;
-              color: #1DA1F2;
-          }
-          
-          .logodiv{
-              border-radius: 40px;
-              padding: 1vh 0 1vh 1vh;
-              margin-right: 5vh;
-              background-color: #000;
-               clear:both;
-              float:left;
-          }
-          
-          .logodiv:hover{
-               background-color: #031019;  
-          }
-          
-          .log{
-                height: 2.5vh;
-                margin: 0.25vh 1.5vh 0.5vh 1vh;   
-            } 
+    .tex{
+        font-family: 'Work Sans', sans-serif;    
+        font-weight: 900;
+        font-size: 1.1vw;
+        color: #D9D9D9;
+    }
+    
+    .texx{
+        font-family: 'Work Sans', sans-serif;    
+        font-weight: 900;
+        font-size: 0.8vw;
+        color: #fff;
+    }    
+      
+    .col-4{
+        border: 1px solid #cccccc;
+        height: 100vh;
+        padding: 0;          
+    }
 
-          .hovlogo{
-              display: none;
-          }
+    .col-3{
+        height: 100vh;
+        padding: 0;
+    }
+    
+    .col-5{
+        border: 1px solid #cccccc;
+        height: 100vh;
+        padding: 0;
+    }
+    
+    .left-col{
+        border-radius: 40px;
+        padding: 1vh 3vh 1vh 1vh;
+        margin-top: 0.5vh;
+        clear:both;
+        float:left;
+    } 
+         
+    .left-col:hover{
+        background: rgba(29, 161, 242, .1) ;
+        color: #1DA1F2;
+    }
           
-          #cont{
-              display: inline-block;
-              width: auto; 
-              margin-right: 3vh;
-          }
+    .logodiv{
+        border-radius: 40px;
+        padding: 1vh 0 1vh 1vh;
+        margin-right: 5vh;
+        background-color: #000;
+        clear:both;
+        float:left;
+    }
+          
+    .logodiv:hover{
+        background-color: #031019;  
+    }
+          
+    .log{
+        height: 2.5vh;
+        margin: 0.25vh 1.5vh 0.5vh 1vh;   
+    } 
+
+    .hovlogo{
+        display: none;
+    }
+          
+    #cont{
+        display: inline-block;
+        width: auto; 
+        margin-right: 3vh;
+    }
       
-          @media (min-width: 1200px) {
-                .container{
-                    max-width: 80vw;
-                }
-            }
-          
-          a:hover{
-              text-decoration: none;
-              
-          }
-          
-          #tweet-left-col{
-              background-color:#1DA1F2; 
-               border-radius: 40px;
-              padding: 1.2vh 9vh ;              
-              margin-top: 1.5vh;
-              clear:both;
-              float:left;
-             
-          }
-        
-          .foote{
-              border-radius: 40px;
-              padding: 0;
-              margin-top: 0.5vh;
-              display: block;
-              float: left;
-              position: fixed;   
-              bottom: 1vh;
-              
-          }
-          .foote:hover{
-              color:#D9D9D9; 
-              background: rgba(29, 161, 242, .1) ;
-              float: left;
-          }
-          .profilepicleft{
-              height: 4vh;
-              margin: 1vh;  
-              border-radius: 50%;
-              float: left;
-          }
-          .profilepictweet{
-              width: 100%;
-              margin: 0;  
-              padding: 0;
-              border-radius: 50%;
-              float: left;
-          }
-          
-          .data{
-              position: relative;
-              display: inline-block;
-              padding: 0;
-              margin: 0.8vh 0 0.2vh 0;
-          }
-          .name{
-              font-family: 'Work Sans', sans-serif;    
-            font-weight: 900;
-            font-size: 0.9vw;
-            color: #D9D9D9;
-              clear: both;
-              float: left;
-              padding: 0;
-              margin: 0;
-             
-          }
-          .usernametext{
-            font-size: 0.7vw;
-            color: #D9D9D9;
-              clear: both;
-              float: left; 
-              padding: 0;
-              margin: 0;
-          }
-          .treedots{
-               height: 2vh;
-              margin: 1vh 0;  
-              border-radius: 50%;
-              float: right;
-            margin: 2vh;  
-             
-          }
-          
-          .popover {
-                background: #000;
-               box-shadow: 0 0 3px #fff;
-              z-index: 99;
-              color: #fff;
-            }
-       .bs-popover-top .arrow::after,
-        .bs-popover-auto[x-placement^="top"] .arrow::after {
-            border-top-color: #000; 
-            -webkit-filter: drop-shadow(0 2px 1px #666666);
-            filter: drop-shadow(0 2px 1px #666666);
-            
+    @media (min-width: 1200px) {
+        .container{
+            max-width: 80vw;
         }
-          .logoutpopover{
-              background-color:rgba(29, 161, 242, .5); 
-               border-radius: 40px;
-              padding: 1vh 4vh ;              
-              margin: 1.5vh 1.5vh 2vh 1.5vh;
-              clear:both;
-              float:left;
-              color: #fff;
-          }
+    }
           
-          .logoutpopover:hover{
-               background-color:rgba(29, 161, 242, 1); 
-              color: #fff;
-          }
+    a:hover{
+        text-decoration: none;
+    }
           
-          #tweetmodal{
-                background-color:rgba(36,45,52, 0.75);                 
-          }
-          .modal-backdrop.show {
-                opacity: 0;
-            }
-          .modal-body{
-                background-color: #000;
-              padding: 1vh 1vh 0 1vh ;
-            }
-          .modal-footer{
-                background-color: #000;
-                border-top-color: #2F3336;
-            }
-
-          .modal-header{
-                background-color: #000;
-                border-bottom-color: #2F3336;
-              padding: 0;
-          }
-        .tweetmodalbtn{
-              background-color:#1DA1F2; 
-               border-radius: 40px;
-              padding: 1vh 2vh ;              
-              margin-top: 0.75vh;
-              color: #fff;
-            float: right;
-          }
-          .modal-lg {
-              margin-top: 5.5vh;
-                max-width: 33%;
-                min-width: 33%;
-              height: auto;
-            }
-              .modalclose {
-              position: relative;
-              background-color:  #000;
-                  color: #1DA1F2;
-            font-size: 200%;
-                  margin:0 0 0.75vh 1vh;       
-          }
-          
-          .modal-content {
-              border-radius: 15px !important;
-              border: 6px solid black!important;
-            }
-          
-          .textarea{
-                display: block;
-              margin:0.5vh 1vh;
-              width: 98%;
-              height: 12vh;
-              resize: both;
-              min-height: 40px;
-              line-height: 20px;
-              border:none;
-              resize: none;
-              color: #fff;
-              outline: none;
-              color:#fff;
-              font-size: 1.1vw;
-          }
-          #mediaicon{
-               height: 2vh;
-              margin: 0; 
-              margin-right: 1.2vh;
-              float: left;
-          }
-          .modalfooter>input {
-              display: none;
-            }
-
-          #mediainserted{
-             width: 100%;
-             position: relative;
-            }
-          
-            .imgclose{
-              position: absolute;
-                z-index: 100;
-              color: #fff;
-              font-size: 1.5vw;
-              margin:0 0 0 1vh;
-                  padding: 0;
-              float: left;
-                height: 0;
-                text-shadow: 0 0 10px #000;
-                display: none;
-          }
-          
-          [contenteditable=true]:empty:before{
-              content: attr(placeholder);
-              pointer-events: none;
-              display: block; /* For Firefox */
-              color:#6E767D;
-            }
-          .editimage{
-              border: 1px solid #fff;
-              background-color: rgba(0, 0, 0, 0.5);
-                color:#fff;
-                padding: 0.25vh 1vh;
-                position: absolute;
-                z-index: 100;
-                margin: 0;
-                right:2.5vh;
-                bottom: 7.3vh;
-                display: none;
-          }
-          
-      </style>
-      
-      
-  </head>
-  <body>
-        <div class="container">
-          <div class="row">
-            <div class="col-3">
-            <div id = "cont" class="float-right">
-                <a class = "logodiv">                
-                    <img class = "log" src="http://barathdandu-com.stackstaging.com/p/images/logowhiteonblack.png" alt="Twitter">
-                </a>
-                
-                <a href="https://www.w3schools.com" class = "left-col tex">
-                    <img class = "log" src="http://barathdandu-com.stackstaging.com/p/images/homewhitelogo.png" alt="Twitter">
-                    <img class = "log hovlogo" src="http://barathdandu-com.stackstaging.com/p/images/hhl.png" alt="Twitter">
-                    Home   
-                </a >
-                
-                <a href="https://www.w3schools.com" class = "left-col tex">
-                    <img class = "log" src="http://barathdandu-com.stackstaging.com/p/images/explorewhitelogo.png" alt="Twitter">
-                    <img class = "log hovlogo" src="http://barathdandu-com.stackstaging.com/p/images/ehl.png" alt="Twitter">
-                    Explore
-                </a>
-                
-                <a href="https://www.w3schools.com" class = "left-col tex">
-                    <img class = "log" src="http://barathdandu-com.stackstaging.com/p/images/notificationswhitelogo.png" alt="Twitter">
-                    <img class = "log hovlogo" src="http://barathdandu-com.stackstaging.com/p/images/nhl.png" alt="Twitter">
-                    Notifications
-                </a>
-                
-                <a href="https://www.w3schools.com" class = "left-col tex">
-                    <img class = "log" src="http://barathdandu-com.stackstaging.com/p/images/messageswhitelogo.png" alt="Twitter">
-                    <img class = "log hovlogo" src="http://barathdandu-com.stackstaging.com/p/images/mhl.png" alt="Twitter">
-                    Messages
-                </a>
-                
-                <a href="https://www.w3schools.com" class = "left-col tex">
-                    <img class = "log" src="http://barathdandu-com.stackstaging.com/p/images/bookmarkswhitelogo.png" alt="Twitter">                  
-                    <img class = "log hovlogo" src="http://barathdandu-com.stackstaging.com/p/images/bhl.png" alt="Twitter">
-                    Bookmarks
-                </a>
-                
-                <a href="https://www.w3schools.com" class = "left-col tex">
-                    <img class = "log" src="http://barathdandu-com.stackstaging.com/p/images/listswhitelogo.png" alt="Twitter">
-                    <img class = "log hovlogo" src="http://barathdandu-com.stackstaging.com/p/images/lhl.png" alt="Twitter">
-                    Lists
-                </a>
-                
-                <a href="https://www.w3schools.com" class = "left-col tex">
-                    <img class = "log" src="http://barathdandu-com.stackstaging.com/p/images/profilewhitelogo.png" alt="Twitter">
-                    <img class = "log hovlogo" src="http://barathdandu-com.stackstaging.com/p/images/phl.png" alt="Twitter">
-                    Profile
-                </a>
-                
-                <a href="https://www.w3schools.com" class = "left-col tex">
-                    <img class = "log" src="http://barathdandu-com.stackstaging.com/p/images/morewhitelogo.png" alt="Twitter">
-                    <img class = "log hovlogo" src="http://barathdandu-com.stackstaging.com/p/images/morehl.png" alt="Twitter">
-                    More
-                </a>
-                <br><br>
-                <input type = "button"  id = "tweet-left-col" class = "texx" value = "Tweet" data-toggle="modal" data-target="#tweetmodal" >
+    #tweet-left-col{
+        background-color:#1DA1F2; 
+        border-radius: 40px;
+        padding: 1.2vh 9vh ;              
+        margin-top: 1.5vh;
+        clear:both;
+        float:left;
+    }
         
-                  <a class = "foote popover-dismiss" data-html='true' tabindex="0" data-toggle="popover" data-placement="top"  
-                     data-content="<a class = 'logoutpopover texx' href='http://barathdandu-com.stackstaging.com/p/home.php?name=lauda'>Log Out</a>.">      
-                      <img class = "profilepicleft" src="http://barathdandu-com.stackstaging.com/p/images/userIcon.png" > 
-                      <div class = "data">
-                       <span class="name"> Barath Dandu</span> 
-                       <span class="usernametext"> @barathdandu</span> 
-                      </div>
-                          <img class = "treedots" src="http://barathdandu-com.stackstaging.com/p/images/treedotswhitelogo.png" > 
-                          <img class = "treedots hovlogo" src="http://barathdandu-com.stackstaging.com/p/images/tdh.png" >   
-                </a>
-            </div>
-            
+    .foote{
+        border-radius: 40px;
+        padding: 0;
+        margin-top: 0.5vh;
+        display: block;
+        float: left;
+        position: fixed;   
+        bottom: 1vh;        
+    }
+    
+    .foote:hover{
+        color:#D9D9D9; 
+        background: rgba(29, 161, 242, .1) ;
+        float: left;
+    }
+    
+    .profilepicleft{
+        height: 4.7vh;
+        margin: 1vh;  
+        border-radius: 50%;
+        float: left;
+    }
+    
+    .profilepictweet{
+        width: 100%;
+        margin: 0;  
+        padding: 0;
+        border-radius: 50%;
+        float: left;
+    }
+          
+    .data{
+        position: relative;
+        display: inline-block;
+        padding: 0;
+        margin: 0.8vh 0 0.2vh 0;
+    }
+    
+    .name{
+        font-family: 'Work Sans', sans-serif;    
+        font-weight: 900;
+        font-size: 1.5vh;
+        color: #D9D9D9;
+        clear: both;
+        float: left;
+        padding: 0;
+        margin: 0.3vh;         
+    }
+    
+    .usernametext{
+        font-size: 1.2vh;
+        color: #6E767D;
+        clear: both;
+        float: left; 
+        padding: 0;
+        margin: 0;
+    }
+    
+    .treedots{
+        height: 2vh;
+        margin: 1vh 0;  
+        border-radius: 50%;
+        float: right;
+        margin-top: 2.5vh;    
+        margin-right: 0.5vh;
+        margin-left:0.5vh;           
+    }          
+    
+    .popover {
+        background: #000;
+        box-shadow: 0 0 3px #fff;
+        z-index: 99;
+        color: #fff;
+    }
+    
+    .bs-popover-top .arrow::after,.bs-popover-auto[x-placement^="top"] .arrow::after {
+        border-top-color: #000; 
+        -webkit-filter: drop-shadow(0 2px 1px #666666);
+        filter: drop-shadow(0 2px 1px #666666);     
+    }
+    
+    .logoutpopover{
+        background-color:rgba(29, 161, 242, .5); 
+        border-radius: 40px;
+        padding: 1vh 4vh ;              
+        margin: 1.5vh 1.5vh 2vh 1.5vh;
+        clear:both;
+        float:left;
+        color: #fff;
+    }
+    
+    .logoutpopover:hover{
+        background-color:rgba(29, 161, 242, 1); 
+        color: #fff;
+    }
+    
+    #tweetmodal{
+        background-color:rgba(36,45,52, 0.75);                 
+    }
+    
+    .modal-backdrop.show {
+        opacity: 0;
+    }
+    
+    .modal-body{
+        background-color: #000;
+        padding: 1vh 1vh 0 1vh ;
+    }
+    
+    .modal-footer{
+        background-color: #000;
+        border-top-color: #2F3336;
+    }
+    
+    .modal-header{
+        background-color: #000;
+        border-bottom-color: #2F3336;
+        padding: 0;
+    }
+    
+    .tweetmodalbtn{
+        background-color:#1DA1F2; 
+        border-radius: 40px;
+        padding: 1vh 2vh ;              
+        margin-top: 0.75vh;
+        color: #fff;
+        float: right;
+    }
+    
+    .modal-lg {
+        margin-top: 5.5vh;
+        max-width: 33%;
+        min-width: 33%;
+        height: auto;
+    }
+    
+    .modalclose {
+        position: relative;
+        background-color:  #000;
+        color: #1DA1F2;
+        font-size: 200%;
+        margin:0 0 0.75vh 1vh;       
+    }
+          
+    .modal-content {
+        border-radius: 15px !important;
+        border: 6px solid black!important;
+    }
+          
+    .textarea{
+        display: block;
+        margin:0.5vh 1vh;
+        width: 98%;
+        height: 12vh;
+        resize: both;
+        min-height: 40px;
+        line-height: 20px;
+        border:none;
+        resize: none;
+        color: #fff;
+        outline: none;
+        color:#fff;
+        font-size: 1.1vw;
+    }
+    
+    #mediaicon{
+        height: 2vh;
+        margin: 0; 
+        margin-right: 1.2vh;
+        float: left;
+    }
+    
+    .modalfooter>input {
+        display: none;
+    }
+    
+    #mediainserted{
+        width: 100%;
+        position: relative;
+    }
+    
+    .imgclose{
+        position: absolute;
+        z-index: 100;
+        color: #fff;
+        font-size: 1.5vw;
+        margin:0 0 0 1vh;
+        padding: 0;
+        float: left;
+        height: 0;
+        text-shadow: 0 0 10px #000;
+        display: none;
+    }
+          
+    [contenteditable=true]:empty:before{
+        content: attr(placeholder);
+        pointer-events: none;
+        display: block; /* For Firefox */
+        color:#6E767D;
+    }
+    
+    .editimage{
+        border: 1px solid #fff;
+        background-color: rgba(0, 0, 0, 0.5);
+        color:#fff;
+        padding: 0.25vh 1vh;
+        position: absolute;
+        z-index: 100;
+        margin: 0;
+        right:2.5vh;
+        bottom: 7.3vh;
+        display: none;
+    }
+          
+    </style>
+        
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-3">
+                <div id = "cont" class="float-right">
+                    
+                    <a class = "logodiv">                
+                        <img class = "log" src="http://barathdandu-com.stackstaging.com/p/images/logowhiteonblack.png" alt="Twitter">
+                    </a>
                 
-            <!-- Modal -->
-            <div class="modal" id="tweetmodal" tabindex="-1" >
-              <div class="modal-dialog modal-lg">
-                <div class="modal-content   ">
-                  <div class="modal-header">
-                    <button type="button" class="modalclose" data-dismiss="modal">
-                      <span >&times;</span>
-                    </button>
-                  </div>
-                    <div class="modal-body" >
-                        <div id = "modalpage1">
-                            <div style = "height:100%; width:10%; float:left;">
-                                    <img class = "profilepictweet" src="http://barathdandu-com.stackstaging.com/p/images/userIcon.png" > 
-                            </div>
-                            <div id = "te" style = "float:left; width:90%;height:auto;">
-                                <span class="textarea" role="textbox" contenteditable="true" placeholder="What's happening?"></span>
-                            </div>
-                            <div class = "mediadiv"style ="width:87%; float:right;overflow:hidden; margin: 1vh;border-radius: 20px;" >
-                                    <button  type="button" class="imgclose"><span >&times;  </span></button>
-                                <img id="mediainserted" src=""  >
-                                <button  type="button" class="editimage logodiv"><span >Edit</span></button>
-                            </div>
-                            
-                            <div class = "modalfooter" style = "float:right; width:90%;height:auto;margin:0.5vh;border-top: 1px solid #2F3336;">
-                                    <label for = "fileinp" class = "logodiv" id = "insrtpht">  
-                                        <img id = "mediaicon" src="http://barathdandu-com.stackstaging.com/p/images/insertmedia.png" alt="Twitter">
-                                    </label>
-                                    <input id="fileinp" type="file" accept="image/png, image/gif, image/jpeg" name = "fileinp">
+                    <a href="https://www.w3schools.com" class = "left-col tex">
+                        <img class = "log" src="http://barathdandu-com.stackstaging.com/p/images/homewhitelogo.png" alt="Twitter">
+                        <img class = "log hovlogo" src="http://barathdandu-com.stackstaging.com/p/images/hhl.png" alt="Twitter">
+                        Home   
+                    </a >
 
-                                    <button type="button" class="tweetmodalbtn texx">Tweet</button>
-                            </div>
+                    <a href="https://www.w3schools.com" class = "left-col tex">
+                        <img class = "log" src="http://barathdandu-com.stackstaging.com/p/images/explorewhitelogo.png" alt="Twitter">
+                        <img class = "log hovlogo" src="http://barathdandu-com.stackstaging.com/p/images/ehl.png" alt="Twitter">
+                        Explore
+                    </a>
+                
+                    <a href="https://www.w3schools.com" class = "left-col tex">
+                        <img class = "log" src="http://barathdandu-com.stackstaging.com/p/images/notificationswhitelogo.png" alt="Twitter">
+                        <img class = "log hovlogo" src="http://barathdandu-com.stackstaging.com/p/images/nhl.png" alt="Twitter">
+                        Notifications
+                    </a>
+                
+                    <a href="https://www.w3schools.com" class = "left-col tex">
+                        <img class = "log" src="http://barathdandu-com.stackstaging.com/p/images/messageswhitelogo.png" alt="Twitter">
+                        <img class = "log hovlogo" src="http://barathdandu-com.stackstaging.com/p/images/mhl.png" alt="Twitter">
+                        Messages
+                    </a>
+                
+                    <a href="https://www.w3schools.com" class = "left-col tex">
+                        <img class = "log" src="http://barathdandu-com.stackstaging.com/p/images/bookmarkswhitelogo.png" alt="Twitter">                  
+                        <img class = "log hovlogo" src="http://barathdandu-com.stackstaging.com/p/images/bhl.png" alt="Twitter">
+                        Bookmarks
+                    </a>
+                
+                    <a href="https://www.w3schools.com" class = "left-col tex">
+                        <img class = "log" src="http://barathdandu-com.stackstaging.com/p/images/listswhitelogo.png" alt="Twitter">
+                        <img class = "log hovlogo" src="http://barathdandu-com.stackstaging.com/p/images/lhl.png" alt="Twitter">
+                        Lists
+                    </a>
+                
+                    <a href="https://www.w3schools.com" class = "left-col tex">
+                        <img class = "log" src="http://barathdandu-com.stackstaging.com/p/images/profilewhitelogo.png" alt="Twitter">
+                        <img class = "log hovlogo" src="http://barathdandu-com.stackstaging.com/p/images/phl.png" alt="Twitter">
+                        Profile
+                    </a>
+                
+                    <a href="https://www.w3schools.com" class = "left-col tex">
+                        <img class = "log" src="http://barathdandu-com.stackstaging.com/p/images/morewhitelogo.png" alt="Twitter">
+                        <img class = "log hovlogo" src="http://barathdandu-com.stackstaging.com/p/images/morehl.png" alt="Twitter">
+                        More
+                    </a>
+                    
+                    <br><br>
+                    <input type = "button"  id = "tweet-left-col" class = "texx" value = "Tweet" data-toggle="modal" data-target="#tweetmodal" >
+
+                    <a class = "foote popover-dismiss" data-html='true' tabindex="0" data-toggle="popover" data-placement="top" data-content="<a class = 'logoutpopover texx' href='http://barathdandu-com.stackstaging.com/p/home.php?name=lauda'>Log Out</a>.">      
+                        <img class = "profilepicleft" src="http://barathdandu-com.stackstaging.com<?php echo $piclocation ?>" > 
+                        <div class = "data">
+                            <span class="name"> <?php echo $name ?></span> 
+                            <span class="usernametext"><?php echo $username ?></span> 
                         </div>
-                        <div id = "modalpage2" style = "display: none;">
-                            <div class = "editdiv" style ="width:95%; height: 28vh;float:right;overflow:hidden; margin:1vh;border-radius: 20px;">
-                                <span id = "h" ></span>
+                        <img class = "treedots" src="http://barathdandu-com.stackstaging.com/p/images/treedotswhitelogo.png" > 
+                        <img class = "treedots hovlogo" src="http://barathdandu-com.stackstaging.com/p/images/tdh.png" >   
+                    </a>
+                
+                </div>
+            
+                <!-- Modal -->
+                <div class="modal" id="tweetmodal" tabindex="-1" >
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content   ">
+                            <div class="modal-header">
+                                <button type="button" class="modalclose" data-dismiss="modal">
+                                    <span >&times;</span>
+                                </button>
                             </div>
-                            <div class = "modalfooter" style = "float:right; width:90%;height:auto;margin:0.5vh;border-top: 1px solid #2F3336;">
-                                <button id = "editcancel" type="button" class="tweetmodalbtn texx" style = "margin-left:1vh; background-color: #6E767D;">Cancel</button>
-                                <button id = "saveedit" type="button" class="tweetmodalbtn texx">Save</button>
+                            <div class="modal-body" >
+                                <div id = "modalpage1">
+                                    
+                                    <div style = "height:100%; width:10%; float:left;">
+                                        <img class = "profilepictweet" src="http://barathdandu-com.stackstaging.com<?php echo $piclocation ?>" > 
+                                    </div>
+                                    
+                                    <div id = "te" style = "float:left; width:90%;height:auto;">
+                                        <span class="textarea" role="textbox" contenteditable="true" placeholder="What's happening?"></span>
+                                    </div>
+                                    
+                                    <div class = "mediadiv"style =" display:none;width:87%; float:right;overflow:hidden; margin: 1vh;border-radius: 20px;" >
+                                        <button  type="button" class="imgclose"><span >&times;  </span></button>
+                                        <img id="mediainserted" src=""  >
+                                        <button  type="button" class="editimage logodiv"><span >Edit</span></button>
+                                    </div>
+                            
+                                    <div class = "modalfooter" style = "float:right; width:90%;height:auto;margin:0.5vh;border-top: 1px solid #2F3336;">
+                                        <label for = "fileinp" class = "logodiv" id = "insrtpht">  
+                                            <img id = "mediaicon" src="http://barathdandu-com.stackstaging.com/p/images/insertmedia.png" alt="Twitter">
+                                        </label>
+                                        <input id="fileinp" type="file" accept="image/png, image/gif, image/jpeg" name = "fileinp">
+                                        <button type="button" class="tweetmodalbtn texx">Tweet</button>
+                                    </div>
 
+                                </div>
+                            
+                                <div id = "modalpage2" style = "display: none;">
+                                
+                                    <div class = "editdiv" style ="border:1px solid #fff;width:95%; float:right;overflow:hidden; margin:1vh;border-radius: 20px;">
+                                        <span id = "h" ></span>
+                                    </div>
+                                
+                                    <div class = "modalfooter" style = "float:right; width:90%;height:auto;margin:0.5vh;border-top: 1px solid #2F3336;">
+                                        <button id = "editcancel" type="button" class="tweetmodalbtn texx" style = "margin-left:1vh; background-color: #6E767D;">Cancel</button>
+                                        <button id = "saveedit" type="button" class="tweetmodalbtn texx">Save</button>
+                                    </div>
+                                
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-              </div>
+            
             </div>
-              
-
-              
-              </div>
+        
             <div class="col-5">col-5</div>
+
             <div class="col-4">col-4</div>
-            </div>
-        </div>
+
+        </div>   
+    </div>
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.js"></script>
-    <link href="crop.css" rel="stylesheet"/>
+    <link href="http://barathdandu-com.stackstaging.com/p/crop.css" rel="stylesheet"/>
 
     <script>
         
         $(document).ready(function(){
+            
             $image_crop = $('#h').croppie({
-            enableExif: true,
-            enableResize: true,
-            viewport: {
-                width:355,
-                height:200,
-                type:'square'
-            }
+                enableExif: true,
+                enableResize: true,
+                viewport: {
+                    width:355,
+                    height:200,
+                    type:'square'
+                }
             });
-        $(".editimage").click(function(){
-            $("#modalpage1").hide();
-            $("#modalpage2").show();
-            var reader = new FileReader();
-            reader.onload = function (event) {
-             $image_crop.croppie('bind', {
-               url: event.target.result
-             }).then(function(){
-               console.log('jQuery bind complete');
-             });
-           }
-           reader.readAsDataURL(fileinp.files[0]);
+
+            $(".editimage").click(function(){
+                $("#modalpage1").hide();
+                $("#modalpage2").show();
+                var reader = new FileReader();
+                reader.onload = function (event) {
+                    $image_crop.croppie('bind', {
+                    url: event.target.result
+                    }).then(function(){
+                        console.log('jQuery bind complete');
+                    });
+                }
+                reader.readAsDataURL(fileinp.files[0]);
             });
 
             $("#saveedit").click(function(event){
@@ -494,33 +570,39 @@
         });
 
         fileinp.onchange = evt => {
-          const [file] = fileinp.files
-          if (file) {
-              $(".imgclose").show();
-              $(".editimage").show();
-            mediainserted.src = URL.createObjectURL(file);
-            mediainserted.onload = function(){
-                setheight();
-            } 
-          }
+            const [file] = fileinp.files
+            if (file) {
+                $(".imgclose").show();
+                $(".editimage").show();
+                $(".mediadiv").show();
+                mediainserted.src = URL.createObjectURL(file);
+                mediainserted.onload = function(){
+                    setheight();
+                } 
+            }
         }
 
         $(window).resize(function() {
-            setheight();                
+            setheight();  
+            $("#modalpage2").hide();
+            $("#modalpage1").show();
         });
 
-        function setheight() {
+        function setheight(){
             const [file] = fileinp.files
             if (file) {
                 tweetmediaheight = mediainserted.height;
                 var div = $('.mediadiv');
                 var width = div.width();
-                var newheight = (width * 9/16);
-                if(tweetmediaheight > newheight ){
-                    $('.mediadiv').height(newheight);
-                    $('.editdiv').height(newheight);
+                var defaultheight = (width * 9/16);
+                if(tweetmediaheight > defaultheight ){
+                    $('.mediadiv').height(defaultheight);
                 }else{
                     $('.mediadiv').height(tweetmediaheight);
+                }
+                if (tweetmediaheight < 220){
+                    $('.editdiv').height(220);
+                }else{
                     $('.editdiv').height(tweetmediaheight);
                 }
             }
@@ -536,40 +618,38 @@
             $(".imgclose").hide();
             $(".editimage").hide();
             $('.mediadiv').height(0);
+            $('#fileinp').val('')
         });
      
         $(".left-col").hover(function(){
-           $(this).children('img:nth(0)').hide();
-           $(this).children('img:nth(1)').show();
+            $(this).children('img:nth(0)').hide();
+            $(this).children('img:nth(1)').show();
         }, function(){
             $(this).children('img:nth(0)').show();
-           $(this).children('img:nth(1)').hide();        
+            $(this).children('img:nth(1)').hide();        
         });
         
-         $(".foote").hover(function(){
-           $(this).children('img:nth(1)').hide();
-           $(this).children('img:nth(2)').show();
+        $(".foote").hover(function(){
+            $(this).children('img:nth(1)').hide();
+            $(this).children('img:nth(2)').show();
         }, function(){
             $(this).children('img:nth(1)').show();
-           $(this).children('img:nth(2)').hide();     
+            $(this).children('img:nth(2)').hide();     
         });
       
         $(function () {
-          $('[data-toggle="popover"]').popover({html:true,sanitize: false})
+            $('[data-toggle="popover"]').popover({html:true,sanitize: false})
         });
         
         $('#te').on('input', function () {
-            this.style.height = 'auto';
-             
-            this.style.height =
-                    (this.scrollHeight) + 'px';
+            this.style.height = 'auto'; 
+            this.style.height = (this.scrollHeight) + 'px';
         });
-     
+            
         $(document).on("click", "#funcid", function () {
             $(this).parents(".popover").popover('hide');
         });
 
-
     </script>
-  </body>
+</body>
 </html>
