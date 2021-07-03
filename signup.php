@@ -28,7 +28,7 @@
                 $error .= "<div class='alert alert-success' role='alert'>You have been signed up!<br></div>";
                 session_start();
                 $_SESSION['email'] = mysqli_real_escape_string($link, $_POST['email']);
-                header("Location: http://barathdandu-com.stackstaging.com/p/signup2.php/"); 
+                header("Location: http://barathdandu-com.stackstaging.com/twitter/signup2.php/"); 
                 exit();
             }
             else{
@@ -50,7 +50,7 @@
     <title>Sign up to Twitter</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@600&display=swap" rel="stylesheet">
-    <link rel="icon" href="http://barathdandu-com.stackstaging.com/p/images/Bluelogo.png">
+    <link rel="icon" href="http://barathdandu-com.stackstaging.com/twitter/images/Bluelogo.png">
 
     <style>
     
@@ -126,7 +126,7 @@
         <div class="row  justify-content-center ">
 
             <form id = "b" class = "requires-validation p-5 m-5" novalidate method = "POST">
-                <img id = "log" src="https://barathdandu-com.stackstaging.com/p/images/logowhiteonblack.png" alt="Twitter">
+                <img id = "log" src="https://barathdandu-com.stackstaging.com/twitter/images/logowhiteonblack.png" alt="Twitter">
                 <p></p>
 
                 <h1 class="tex">Sign up to Twitter</h1>
@@ -153,7 +153,7 @@
                 <div class="text-center mt-4">
                     <button type="submit" class="btn btn-primary" name = "sub" Value = "sb">Next</button>
                 </div>
-                <p class = "mt-4">Already have an account?  <a href="https://barathdandu-com.stackstaging.com/p/login.php" style="color:dodgerblue">Login</a>.</p>
+                <p class = "mt-4">Already have an account?  <a href="https://barathdandu-com.stackstaging.com/twitter/login.php" style="color:dodgerblue">Login</a>.</p>
             </form>
         </div>
     </div>    
