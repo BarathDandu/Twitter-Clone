@@ -3,7 +3,7 @@
     session_start();
 
     if(!(array_key_exists("email", $_SESSION) && $_SESSION['email'])){
-        header("Location: http://barathdandu-com.stackstaging.com/p/welcome.php/"); 
+        header("Location: http://barathdandu-com.stackstaging.com/twitter/welcome.php"); 
         exit();
     }
      
@@ -18,7 +18,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@600&display=swap" rel="stylesheet">      
-    <link rel="icon" href="http://barathdandu-com.stackstaging.com/p/images/Bluelogo.png">		
+    <link rel="icon" href="http://barathdandu-com.stackstaging.com/twitter/images/Bluelogo.png">		
 
     <title>Sign up to Twitter</title>
       
@@ -166,7 +166,7 @@
     </head>
     <body>
         <div class="contain" >
-            <img id = "log" src="https://barathdandu-com.stackstaging.com/p/images/logowhiteonblack.png" alt="Twitter">
+            <img id = "log" src="http://barathdandu-com.stackstaging.com/twitter/images/logowhiteonblack.png" alt="Twitter">
             <p></p>
             <h1 class="tex">Sign up to Twitter</h1>         
             <p></p>
@@ -180,7 +180,7 @@
                         <div class="text" style = "font-size:2vh;">Change Profile Picture</div>
                     </div>
                 </label>                            
-                <img src="http://barathdandu-com.stackstaging.com/p/images/userIcon.png" id="uploaded_image" style = "border-radius: 50%; width:100%;"/>
+                <img src="http://barathdandu-com.stackstaging.com/twitter/images/userIcon.png" id="uploaded_image" style = "border-radius: 50%; width:100%;"/>
                 <input type="file" name="image" class="image" id="upload_image" style="display:none" accept="image/x-png,image/gif,image/jpeg" />
             </div>
             <form method="POST" id = "inp">
@@ -235,11 +235,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.5/croppie.js"></script>
-    <link href="http://barathdandu-com.stackstaging.com/p/crop.css" rel="stylesheet"/>
+    <link href="http://barathdandu-com.stackstaging.com/twitter/crop.css" rel="stylesheet"/>
 
     <script>
 
-    //t1 = window.setTimeout(function(){ window.location = "http://barathdandu-com.stackstaging.com/p/home.php"; },3000);
+    //t1 = window.setTimeout(function(){ window.location = "http://barathdandu-com.stackstaging.com/twitter"; },3000);
 
     $("#signupbtn").click(function(e){
 
@@ -264,7 +264,7 @@
                 $("#unw").css("display", "none");
             }else{
 
-                if (/^[A-Za-z0-9]+$/.test( $("#username").val())) {
+                if (/^[A-Za-z0-9_-]+$/.test( $("#username").val())) {
                     usernameerror = 0;
                     $("#unw").css("display", "none");
                     $("#unlen").css("display", "none");
@@ -304,15 +304,13 @@
                     $("#n").css("display", "none");
                 }
             }
-
-            
         }
 
         if(nameerror == 0  && usernameerror == 0){
             $("#processing").show();
-            if(uploaded_image.src == "http://barathdandu-com.stackstaging.com/p/images/userIcon.png"){
+            if(uploaded_image.src == "http://barathdandu-com.stackstaging.com/twitter/images/userIcon.png"){
                 $.ajax({
-                    url:'http://barathdandu-com.stackstaging.com/p/upload.php/',
+                    url:'http://barathdandu-com.stackstaging.com/twitter/upload.php/',
                     method:'POST',
                     data:{name: $("#name").val(), username: $("#username").val()},
                     success:function(data)
@@ -323,7 +321,7 @@
                         //console.log(data);
                         if ($.trim(data) === "<div class='alert alert-success' role='alert'>You have been signed up!<br></div>") {
                             setTimeout(function() {
-                                window.location.href = "http://barathdandu-com.stackstaging.com/p/home.php/";
+                                window.location.href = "http://barathdandu-com.stackstaging.com/twitter/home";
                             }, 1000);
                         }
                     },
@@ -348,7 +346,7 @@
                     const srcEncoded = ctx.canvas.toDataURL(img, "image/png"); 
                     
                     $.ajax({
-                        url:'http://barathdandu-com.stackstaging.com/p/upload.php/',
+                        url:'http://barathdandu-com.stackstaging.com/twitter/upload.php/',
                         method:'POST',
                         data:{image: srcEncoded, name: $("#name").val(), username: $("#username").val()},
                         success:function(data)
@@ -359,7 +357,7 @@
                             //console.log(data);
                             if ($.trim(data) === "<div class='alert alert-success' role='alert'>You have been signed up!<br></div>") {
                             setTimeout(function() {
-                                window.location.href = "http://barathdandu-com.stackstaging.com/p/home.php/";
+                                window.location.href = "http://barathdandu-com.stackstaging.com/twitter/home";
                             }, 1000);
                         }
                         },

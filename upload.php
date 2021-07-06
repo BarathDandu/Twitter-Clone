@@ -32,7 +32,7 @@ if(array_key_exists("email", $_SESSION) && $_SESSION['email']){
     
                 $decodedData = base64_decode($image_array_2[1]);
     
-                $filename = '/public_html/p/upload/' . time() . '.png';
+                $filename = '/public_html/twitter/upload/' . time() . '.png';
                 $ech =  explode("public_html", $filename);
                     
                 $cid = ftp_connect("ftp.stackcp.com") or die("Couldn't connect to $ftp_host");
@@ -61,7 +61,7 @@ if(array_key_exists("email", $_SESSION) && $_SESSION['email']){
                 ftp_close($conn_id); 
 
             }else{//if no image was sent
-                $query = "UPDATE `twitter` SET `username`= '".mysqli_real_escape_string($link, $_POST['username'])."',`name`= '".mysqli_real_escape_string($link, $_POST['name'])."',`piclocation`= '/p/images/userIcon.png' WHERE email = '".$_SESSION['email']."' LIMIT 1";
+                $query = "UPDATE `twitter` SET `username`= '".mysqli_real_escape_string($link, $_POST['username'])."',`name`= '".mysqli_real_escape_string($link, $_POST['name'])."',`piclocation`= '/twitter/images/userIcon.png' WHERE email = '".$_SESSION['email']."' LIMIT 1";
             
                 //echo $query;
                 

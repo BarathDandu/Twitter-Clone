@@ -5,7 +5,7 @@ $error = "";
 if((array_key_exists("email", $_COOKIE) AND $_COOKIE['email'])){
         session_start();
         $_SESSION['email'] = $_COOKIE['email'];
-        header("Location: https://barathdandu-com.stackstaging.com/twitter/index.php/"); 
+        header("Location: http://barathdandu-com.stackstaging.com/twitter/home"); 
     }
 
     if($_POST['sub']=='sb'){
@@ -33,7 +33,7 @@ if((array_key_exists("email", $_COOKIE) AND $_COOKIE['email'])){
                     setcookie("email", $row['email'], time() + 60*60*24*365);             
                 
                 }
-                header("Location: https://barathdandu-com.stackstaging.com/twitter/index.php/"); 
+                header("Location: http://barathdandu-com.stackstaging.com/twitter/home"); 
                 exit();
 
             } else {
@@ -56,7 +56,7 @@ if((array_key_exists("email", $_COOKIE) AND $_COOKIE['email'])){
 
     <title>Log in to Twitter</title>
     <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@600&display=swap" rel="stylesheet">
-    <link rel="icon" href="https://barathdandu-com.stackstaging.com/twitter/images/Bluelogo.png">
+    <link rel="icon" href="http://barathdandu-com.stackstaging.com/twitter/images/Bluelogo.png">
 
     <style>
        
@@ -132,7 +132,7 @@ if((array_key_exists("email", $_COOKIE) AND $_COOKIE['email'])){
         <div class="row justify-content-center ">
 
             <form id = "b" class = "requires-validation p-5 m-5" novalidate method = "POST">
-                <img id = "log" src="https://barathdandu-com.stackstaging.com/twitter/images/logowhiteonblack.png" alt="Twitter">
+                <img id = "log" src="http://barathdandu-com.stackstaging.com/twitter/images/logowhiteonblack.png" alt="Twitter">
                 <p></p>
 
                 <h1 class="tex">Log in to Twitter</h1>
@@ -158,7 +158,7 @@ if((array_key_exists("email", $_COOKIE) AND $_COOKIE['email'])){
                 <div class="text-center mt-4">
                     <button type="submit" class="btn btn-primary" name = "sub" Value = "sb">Log in</button>
                 </div>
-                <p class = "mt-4">Don't have an account?  <a href="https://barathdandu-com.stackstaging.com/twitter/signup.php" style="color:dodgerblue">Sign Up</a>.</p>
+                <p class = "mt-4">Don't have an account?  <a href="http://barathdandu-com.stackstaging.com/twitter/signup.php" style="color:dodgerblue">Sign Up</a>.</p>
             </form>
         </div>
     </div>    

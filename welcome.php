@@ -7,7 +7,7 @@ if(array_key_exists("email", $_COOKIE) && $_COOKIE['email']){
 
 if(array_key_exists("email", $_SESSION) && $_SESSION['email']){
     
-    header("Location: http://barathdandu-com.stackstaging.com/twitter/home.php"); 
+    header("Location: http://barathdandu-com.stackstaging.com/twitter/home"); 
 }
 
 ?>
@@ -127,15 +127,15 @@ if(array_key_exists("email", $_SESSION) && $_SESSION['email']){
                 <div class="row h-100  align-items-center">
                     <form>
                         <br>
-                        <img id = "log" src="https://barathdandu-com.stackstaging.com/twitter/images/logowhiteonblack.png" alt="Twitter">
+                        <img id = "log" src="http://barathdandu-com.stackstaging.com/twitter/images/logowhiteonblack.png" alt="Twitter">
                         <p>  </p>
                         <br>
                             <p id = "hap">Happening now</p>  
                         <br>
                             <p id = "join">Join Twitter today</p>
-                        <a href="https://barathdandu-com.stackstaging.com/twitter/signup.php" type="button" class="btn btn-primary ">Sign up</a>
+                        <a href="http://barathdandu-com.stackstaging.com/twitter/signup.php" type="button" class="btn btn-primary ">Sign up</a>
                         <br>                       
-                        <a  href="https://barathdandu-com.stackstaging.com/twitter/login.php" type="button" class="btn btn-secondary">Log in</a>
+                        <a  href="http://barathdandu-com.stackstaging.com/twitter/login.php" type="button" class="btn btn-secondary">Log in</a>
 
                     </form>
                 </div>

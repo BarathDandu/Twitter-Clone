@@ -12,7 +12,7 @@ if($_GET['name']=='lauda'){
 
     $_COOKIE['email'] = "";
 
-    header("Location: http://barathdandu-com.stackstaging.com/twitter/welcome.php/"); 
+    header("Location: http://barathdandu-com.stackstaging.com/twitter/welcome.php"); 
     exit();
 
 }else{
@@ -38,12 +38,12 @@ if($_GET['name']=='lauda'){
     
         $piclocation .= $row['piclocation'];
 
-        $username .= '@'.$row['username'];
+        $username .= $row['username'];
 
         $name .= $row['name'];
             
     }else{
-        header("Location: http://barathdandu-com.stackstaging.com/twitter/welcome.php/"); 
+        header("Location: http://barathdandu-com.stackstaging.com/twitter/welcome.php"); 
         exit();
     }
 }

@@ -6,6 +6,8 @@ echo $_GET['name'];
 echo "<br>";
 echo "allah";
 
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,9 +20,19 @@ echo "allah";
 <body>
     <form  method="get">
         <input type="text" name="id" >
-        <input type="text" name="name" >
-        <input type="submit" value="submit">
-    
+        <input type="text" name="name" >    
     </form>
+    <button onclick="updateURL();">Update</button>
+  <script type="text/javascript">
+    function updateURL() {
+      if (history.pushState) {
+          var newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?id=hello';
+          window.history.pushState({path:newurl},'',newurl);
+          //window.location.reload();
+      }
+    }
+
+   
+  </script>
 </body>
 </html>
