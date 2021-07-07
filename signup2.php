@@ -308,11 +308,12 @@
 
         if(nameerror == 0  && usernameerror == 0){
             $("#processing").show();
+            var usernameVal =  $("#username").val();
             if(uploaded_image.src == "http://barathdandu-com.stackstaging.com/twitter/images/userIcon.png"){
                 $.ajax({
                     url:'http://barathdandu-com.stackstaging.com/twitter/upload.php/',
                     method:'POST',
-                    data:{name: $("#name").val(), username: $("#username").val()},
+                    data:{name: $("#name").val(), username: usernameVal.toLowerCase()},
                     success:function(data)
                     {
                         $("#phpresult").html(data);
@@ -321,7 +322,7 @@
                         //console.log(data);
                         if ($.trim(data) === "<div class='alert alert-success' role='alert'>You have been signed up!<br></div>") {
                             setTimeout(function() {
-                                window.location.href = "http://barathdandu-com.stackstaging.com/twitter/home";
+                                window.location.href = "http://barathdandu-com.stackstaging.com/twitter/";
                             }, 1000);
                         }
                     },
@@ -348,7 +349,7 @@
                     $.ajax({
                         url:'http://barathdandu-com.stackstaging.com/twitter/upload.php/',
                         method:'POST',
-                        data:{image: srcEncoded, name: $("#name").val(), username: $("#username").val()},
+                        data:{image: srcEncoded, name: $("#name").val(), username: usernameVal.toLowerCase()},
                         success:function(data)
                         {
                             $("#phpresult").html(data);
@@ -356,10 +357,10 @@
                             $("#processing").hide();                            
                             //console.log(data);
                             if ($.trim(data) === "<div class='alert alert-success' role='alert'>You have been signed up!<br></div>") {
-                            setTimeout(function() {
-                                window.location.href = "http://barathdandu-com.stackstaging.com/twitter/home";
-                            }, 1000);
-                        }
+                                setTimeout(function() {
+                                    window.location.href = "http://barathdandu-com.stackstaging.com/twitter/";
+                                }, 1000);
+                            }
                         },
                         error: function(xhr, status, error) {
                             var err = eval("(" + xhr.responseText + ")");

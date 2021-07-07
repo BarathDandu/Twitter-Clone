@@ -11,344 +11,7 @@
 
     <title>Twitter Home</title>
       
-    <style type="text/css">
-      
-    body, html{
-        margin: 0;
-        padding: 0;
-    }
-        
-    body{
-        color: white;
-        background-color: #000000;
-    }
-          
-    input, button, submit { border:none; } 
-          
-    .tex{
-        font-family: 'Work Sans', sans-serif;    
-        font-weight: 900;
-        font-size: 1.1vw;
-        color: #D9D9D9;
-    }
-    
-    .texx{
-        font-family: 'Work Sans', sans-serif;    
-        font-weight: 900;
-        font-size: 0.8vw;
-        color: #fff;
-    }    
-      
-    .col-4{
-        border: 1px solid #cccccc;
-        height: 100vh;
-        padding: 0;          
-    }
-
-    .col-3{
-        border: 1px solid #cccccc;
-        height: 100vh;
-        padding: 0;
-    }
-    
-    .col-5{
-        border: 1px solid #cccccc;
-        height: 100vh;
-        padding: 0;
-    }
-    
-    .left-col{
-        border-radius: 40px;
-        padding: 1vh 3vh 1vh 1vh;
-        margin-top: 0.5vh;
-        clear:both;
-        float:left;
-    } 
-    
-    .selected-nav{
-        border-radius: 40px;
-        padding: 1vh 3vh 1vh 1vh;
-        margin-top: 0.5vh;
-        clear:both;
-        float:left;
-        display: none;
-        color: #1DA1F2;
-    }
-
-    .selected-nav:hover{
-        background: rgba(29, 161, 242, .1) ;
-        color: #1DA1F2;
-    }
-
-    .left-col:hover{
-        background: rgba(29, 161, 242, .1) ;
-        color: #1DA1F2;
-    }
-          
-    .logodiv{
-        border-radius: 40px;
-        padding: 1vh 0 1vh 1vh;
-        margin-right: 5vh;
-        background-color: #000;
-        clear:both;
-        float:left;
-    }
-          
-    .logodiv:hover{
-        background-color: #031019;  
-    }
-          
-    .log{
-        height: 2.5vh;
-        margin: 0.25vh 1.5vh 0.5vh 1vh;   
-    } 
-
-    .hovlogo{
-        display: none;
-    }
-          
-    #cont{        
-        border: 1px solid #cccccc;
-        display: inline-block;
-        width: auto; 
-        margin-right: 3vh;
-    }
-      
-    @media (min-width: 1200px) {
-        .container{
-            max-width: 80vw;
-        }
-    }
-          
-    a:hover{
-        text-decoration: none;
-    }
-          
-    #tweet-left-col{
-        background-color:#1DA1F2; 
-        border-radius: 40px;
-        padding: 1.2vh 9vh ;              
-        margin-top: 1.5vh;
-        clear:both;
-        float:left;
-    }
-        
-    .foote{
-        border-radius: 40px;
-        padding: 0;
-        display: block;
-        float: left;
-        clear:both;
-        bottom: 1vh;  
-        position:absolute;    
-        width:auto;  
-    }
-    
-    .foote:hover{
-        color:#D9D9D9; 
-        background: rgba(29, 161, 242, .1) ;
-        float: left;
-    }
-    
-    .profilepicleft{
-        height: 4.7vh;
-        margin: 1vh;  
-        border-radius: 50%;
-        float: left;
-    }
-    
-    .profilepictweet{
-        width: 100%;
-        margin: 0;  
-        padding: 0;
-        border-radius: 50%;
-        float: left;
-    }
-          
-    .data{
-        position: relative;
-        display: inline-block;
-        padding: 0;
-        margin: 0.8vh 0 0.2vh 0;
-    }
-    
-    .name{
-        font-family: 'Work Sans', sans-serif;    
-        font-weight: 900;
-        font-size: 1.5vh;
-        color: #D9D9D9;
-        clear: both;
-        float: left;
-        padding: 0;
-        margin: 0.3vh;         
-    }
-    
-    .usernametext{
-        font-size: 1.2vh;
-        color: #6E767D;
-        clear: both;
-        float: left; 
-        padding: 0;
-        margin: 0;
-    }
-    
-    .treedots{
-        height: 2vh;
-        margin: 1vh 0;  
-        border-radius: 50%;
-        float: right;
-        margin-top: 2.5vh;    
-        margin-right: 0.5vh;
-        margin-left:1vh;           
-    }          
-    
-    .popover {
-        background: #000;
-        box-shadow: 0 0 3px #fff;
-        z-index: 99;
-        color: #fff;
-    }
-    
-    .bs-popover-top .arrow::after,.bs-popover-auto[x-placement^="top"] .arrow::after {
-        border-top-color: #000; 
-        -webkit-filter: drop-shadow(0 2px 1px #666666);
-        filter: drop-shadow(0 2px 1px #666666);     
-    }
-    
-    .logoutpopover{
-        background-color:rgba(29, 161, 242, .5); 
-        border-radius: 40px;
-        padding: 1vh 4vh ;              
-        margin: 1.5vh 1.5vh 2vh 1.5vh;
-        clear:both;
-        float:left;
-        color: #fff;
-    }
-    
-    .logoutpopover:hover{
-        background-color:rgba(29, 161, 242, 1); 
-        color: #fff;
-    }
-    
-    #tweetmodal{
-        background-color:rgba(36,45,52, 0.75);                 
-    }
-    
-    .modal-backdrop.show {
-        opacity: 0;
-    }
-    
-    .modal-body{
-        background-color: #000;
-        padding: 1vh 1vh 0 1vh ;
-    }
-    
-    .modal-footer{
-        background-color: #000;
-        border-top-color: #2F3336;
-    }
-    
-    .modal-header{
-        background-color: #000;
-        border-bottom-color: #2F3336;
-        padding: 0;
-    }
-    
-    .tweetmodalbtn{
-        background-color:#1DA1F2; 
-        border-radius: 40px;
-        padding: 1vh 2vh ;              
-        margin-top: 0.75vh;
-        color: #fff;
-        float: right;
-    }
-    
-    .modal-lg {
-        margin-top: 5.5vh;
-        max-width: 33%;
-        min-width: 33%;
-        height: auto;
-    }
-    
-    .modalclose {
-        position: relative;
-        background-color:  #000;
-        color: #1DA1F2;
-        font-size: 200%;
-        margin:0 0 0.75vh 1vh;       
-    }
-          
-    .modal-content {
-        border-radius: 15px !important;
-        border: 6px solid black!important;
-    }
-          
-    .textarea{
-        display: block;
-        margin:0.5vh 1vh;
-        width: 98%;
-        height: 12vh;
-        resize: both;
-        min-height: 40px;
-        line-height: 20px;
-        border:none;
-        resize: none;
-        color: #fff;
-        outline: none;
-        color:#fff;
-        font-size: 1.1vw;
-    }
-    
-    #mediaicon{
-        height: 2vh;
-        margin: 0; 
-        margin-right: 1.1vh;
-        float: left;
-    }
-    
-    .modalfooter>input {
-        display: none;
-    }
-    
-    #mediainserted{
-        width: 100%;
-        position: relative;
-    }
-    
-    .imgclose{
-        position: absolute;
-        z-index: 100;
-        color: #fff;
-        font-size: 1.5vw;
-        margin:0 0 0 1vh;
-        padding: 0;
-        float: left;
-        height: 0;
-        text-shadow: 0 0 10px #000;
-        display: none;
-    }
-          
-    [contenteditable=true]:empty:before{
-        content: attr(placeholder);
-        pointer-events: none;
-        display: block; /* For Firefox */
-        color:#6E767D;
-    }
-    
-    .editimage{
-        border: 1px solid #fff;
-        background-color: rgba(0, 0, 0, 0.5);
-        color:#fff;
-        padding: 0.25vh 1vh;
-        position: absolute;
-        z-index: 100;
-        margin: 0;
-        right:2.5vh;
-        bottom: 7.3vh;
-        display: none;
-    }
-          
-    </style>
+    <link rel="stylesheet" href="main.css">
         
 </head>
 <body>
@@ -356,112 +19,12 @@
 <div class="container">
     <div class="row">
         <div class="col-3">
-            <div id = "cont" class="float-right">
-                
-                <a class = "logodiv">                
-                    <img class = "log" src="http://barathdandu-com.stackstaging.com/twitter/images/logowhiteonblack.png" alt="Twitter">
-                </a>
-            
-                <a href='' id = "home" class = "left-col tex">
-                    <img class = "log" src="http://barathdandu-com.stackstaging.com/twitter/images/homewhitelogo.png" alt="Twitter">
-                    <img class = "log hovlogo" src="http://barathdandu-com.stackstaging.com/twitter/images/hhl.png" alt="Twitter">
-                    Home   
-                </a >
-                <a href='' id = "homePressed" class = "selected-nav tex">
-                    <img class = "log" src="http://barathdandu-com.stackstaging.com/twitter/images/homebluelogo.png" alt="Twitter">
-                    Home   
-                </a >
 
-                <a href=""  id = "explore" class = "left-col tex">
-                    <img class = "log" src="http://barathdandu-com.stackstaging.com/twitter/images/explorewhitelogo.png" alt="Twitter">
-                    <img class = "log hovlogo" src="http://barathdandu-com.stackstaging.com/twitter/images/ehl.png" alt="Twitter">
-                    Explore
-                </a>
-                <a href='' id = "explorePressed" class = "selected-nav tex">
-                    <img class = "log " src="http://barathdandu-com.stackstaging.com/twitter/images/explorebluelogo.png" alt="Twitter">
-                    Explore   
-                </a >
-            
-                <a href="" id = "notifications" class = "left-col tex">
-                    <img class = "log" src="http://barathdandu-com.stackstaging.com/twitter/images/notificationswhitelogo.png" alt="Twitter">
-                    <img class = "log hovlogo" src="http://barathdandu-com.stackstaging.com/twitter/images/nhl.png" alt="Twitter">
-                    Notifications
-                </a>
-                <a href="" id = "notificationsPressed" class = "selected-nav tex">
-                    <img class = "log " src="http://barathdandu-com.stackstaging.com/twitter/images/notificationsbluelogo.png" alt="Twitter">
-                    Notifications
-                </a>
-            
-                <a href="" id = "messages" class = "left-col tex">
-                    <img class = "log" src="http://barathdandu-com.stackstaging.com/twitter/images/messageswhitelogo.png" alt="Twitter">
-                    <img class = "log hovlogo" src="http://barathdandu-com.stackstaging.com/twitter/images/mhl.png" alt="Twitter">
-                    Messages
-                </a>
-                <a href="" id = "messagesPressed" class = "selected-nav tex">
-                    <img class = "log " src="http://barathdandu-com.stackstaging.com/twitter/images/messagesbluelogo.png" alt="Twitter">
-                    Messages
-                </a>
-            
-                <a href="" id = "bookmarks" class = "left-col tex">
-                    <img class = "log" src="http://barathdandu-com.stackstaging.com/twitter/images/bookmarkswhitelogo.png" alt="Twitter">                  
-                    <img class = "log hovlogo" src="http://barathdandu-com.stackstaging.com/twitter/images/bhl.png" alt="Twitter">
-                    Bookmarks
-                </a>
-                <a href="" id = "bookmarksPressed" class = "selected-nav tex">
-                    <img class = "log " src="http://barathdandu-com.stackstaging.com/twitter/images/bookmarksbluelogo.png" alt="Twitter">
-                    Bookmarks
-                </a>
-            
-                <a href="" id = "lists" class = "left-col tex">
-                    <img class = "log" src="http://barathdandu-com.stackstaging.com/twitter/images/listswhitelogo.png" alt="Twitter">
-                    <img class = "log hovlogo" src="http://barathdandu-com.stackstaging.com/twitter/images/lhl.png" alt="Twitter">
-                    Lists
-                </a>
-                <a href="" id = "listsPressed" class = "selected-nav tex">
-                    <img class = "log" src="http://barathdandu-com.stackstaging.com/twitter/images/listsbluelogo.png" alt="Twitter">
-                    Lists
-                </a>
-            
-                <a href="" id = "<?php echo $username ?>" class = "left-col tex">
-                    <img class = "log" src="http://barathdandu-com.stackstaging.com/twitter/images/profilewhitelogo.png" alt="Twitter">
-                    <img class = "log hovlogo" src="http://barathdandu-com.stackstaging.com/twitter/images/phl.png" alt="Twitter">
-                    Profile
-                </a>
-                <a href="" id = "<?php echo $username.'Pressed'?>" class = "selected-nav tex">
-                    <img class = "log" src="http://barathdandu-com.stackstaging.com/twitter/images/profilebluelogo.png" alt="Twitter">
-                    Profile
-                </a>
-            
-                <a href="" id = "more" class = "left-col tex">
-                    <img class = "log" src="http://barathdandu-com.stackstaging.com/twitter/images/morewhitelogo.png" alt="Twitter">
-                    <img class = "log hovlogo" src="http://barathdandu-com.stackstaging.com/twitter/images/morehl.png" alt="Twitter">
-                    More
-                </a>
-                <a href="" id = "morePressed" class = "selected-nav tex">
-                    <img class = "log " src="http://barathdandu-com.stackstaging.com/twitter/images/morehl.png" alt="Twitter">
-                    More
-                </a>
-                
-                <br><br>
-                <input type = "button"  id = "tweet-left-col" class = "texx" value = "Tweet" data-toggle="modal" data-target="#tweetmodal" >
-
-                <a class = "foote popover-dismiss" data-html='true' tabindex="0" data-toggle="popover" data-placement="top" data-content="<a class = 'logoutpopover texx' href='http://barathdandu-com.stackstaging.com/twitter/index.php?name=lauda'>Log Out</a>.">      
-                    <img class = "profilepicleft" src="http://barathdandu-com.stackstaging.com<?php echo $piclocation ?>" > 
-                    <div class = "data">
-                        <span class="name"> <?php echo $name ?></span> 
-                        <span class="usernametext"><?php echo '@'.$username ?></span> 
-                    </div>
-                    <img class = "treedots" src="http://barathdandu-com.stackstaging.com/twitter/images/treedotswhitelogo.png" > 
-                    <img class = "treedots hovlogo" src="http://barathdandu-com.stackstaging.com/twitter/images/tdh.png" >   
-                </a>
-            
-            </div>
-        
             <!-- Modal -->
             <div class="modal" id="tweetmodal" tabindex="-1" >
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content   ">
-                        <div class="modal-header">
+                        <div class="modal-header" style = "border-bottom-color: #2F3336;">
                             <button type="button" class="modalclose" data-dismiss="modal">
                                 <span >&times;</span>
                             </button>
@@ -509,16 +72,177 @@
                     </div>
                 </div>
             </div>
+
+            <div id = "cont" class="float-right">
+                
+                <a class = "logodiv">                
+                    <img class = "log" src="http://barathdandu-com.stackstaging.com/twitter/images/logowhiteonblack.png" alt="Twitter">
+                </a>
+            
+                <a href='' id = "Home" class = "left-col tex">
+                    <img class = "log" src="http://barathdandu-com.stackstaging.com/twitter/images/homewhitelogo.png" alt="Twitter">
+                    <img class = "log hovlogo" src="http://barathdandu-com.stackstaging.com/twitter/images/hhl.png" alt="Twitter">
+                    Home   
+                </a >
+                <a href='' id = "HomePressed" class = "selected-nav tex">
+                    <img class = "log" src="http://barathdandu-com.stackstaging.com/twitter/images/homebluelogo.png" alt="Twitter">
+                    Home   
+                </a >
+
+                <a href=""  id = "Explore" class = "left-col tex">
+                    <img class = "log" src="http://barathdandu-com.stackstaging.com/twitter/images/explorewhitelogo.png" alt="Twitter">
+                    <img class = "log hovlogo" src="http://barathdandu-com.stackstaging.com/twitter/images/ehl.png" alt="Twitter">
+                    Explore
+                </a>
+                <a href='' id = "ExplorePressed" class = "selected-nav tex">
+                    <img class = "log " src="http://barathdandu-com.stackstaging.com/twitter/images/explorebluelogo.png" alt="Twitter">
+                    Explore   
+                </a >
+            
+                <a href="" id = "Notifications" class = "left-col tex">
+                    <img class = "log" src="http://barathdandu-com.stackstaging.com/twitter/images/notificationswhitelogo.png" alt="Twitter">
+                    <img class = "log hovlogo" src="http://barathdandu-com.stackstaging.com/twitter/images/nhl.png" alt="Twitter">
+                    Notifications
+                </a>
+                <a href="" id = "NotificationsPressed" class = "selected-nav tex">
+                    <img class = "log " src="http://barathdandu-com.stackstaging.com/twitter/images/notificationsbluelogo.png" alt="Twitter">
+                    Notifications
+                </a>
+            
+                <a href="" id = "Messages" class = "left-col tex">
+                    <img class = "log" src="http://barathdandu-com.stackstaging.com/twitter/images/messageswhitelogo.png" alt="Twitter">
+                    <img class = "log hovlogo" src="http://barathdandu-com.stackstaging.com/twitter/images/mhl.png" alt="Twitter">
+                    Messages
+                </a>
+                <a href="" id = "MessagesPressed" class = "selected-nav tex">
+                    <img class = "log " src="http://barathdandu-com.stackstaging.com/twitter/images/messagesbluelogo.png" alt="Twitter">
+                    Messages
+                </a>
+            
+                <a href="" id = "Bookmarks" class = "left-col tex">
+                    <img class = "log" src="http://barathdandu-com.stackstaging.com/twitter/images/bookmarkswhitelogo.png" alt="Twitter">                  
+                    <img class = "log hovlogo" src="http://barathdandu-com.stackstaging.com/twitter/images/bhl.png" alt="Twitter">
+                    Bookmarks
+                </a>
+                <a href="" id = "BookmarksPressed" class = "selected-nav tex">
+                    <img class = "log " src="http://barathdandu-com.stackstaging.com/twitter/images/bookmarksbluelogo.png" alt="Twitter">
+                    Bookmarks
+                </a>
+            
+                <a href="" id = "Lists" class = "left-col tex">
+                    <img class = "log" src="http://barathdandu-com.stackstaging.com/twitter/images/listswhitelogo.png" alt="Twitter">
+                    <img class = "log hovlogo" src="http://barathdandu-com.stackstaging.com/twitter/images/lhl.png" alt="Twitter">
+                    Lists
+                </a>
+                <a href="" id = "ListsPressed" class = "selected-nav tex">
+                    <img class = "log" src="http://barathdandu-com.stackstaging.com/twitter/images/listsbluelogo.png" alt="Twitter">
+                    Lists
+                </a>
+            
+                <a href="" id = "<?php echo $username ?>" class = "left-col tex">
+                    <img class = "log" src="http://barathdandu-com.stackstaging.com/twitter/images/profilewhitelogo.png" alt="Twitter">
+                    <img class = "log hovlogo" src="http://barathdandu-com.stackstaging.com/twitter/images/phl.png" alt="Twitter">
+                    Profile
+                </a>
+                <a href="" id = "<?php echo $username.'Pressed'?>" class = "selected-nav tex">
+                    <img class = "log" src="http://barathdandu-com.stackstaging.com/twitter/images/profilebluelogo.png" alt="Twitter">
+                    Profile
+                </a>
+            
+                <a href="" id = "More" class = "left-col tex">
+                    <img class = "log" src="http://barathdandu-com.stackstaging.com/twitter/images/morewhitelogo.png" alt="Twitter">
+                    <img class = "log hovlogo" src="http://barathdandu-com.stackstaging.com/twitter/images/morehl.png" alt="Twitter">
+                    More
+                </a>
+                <a href="" id = "MorePressed" class = "selected-nav tex">
+                    <img class = "log " src="http://barathdandu-com.stackstaging.com/twitter/images/morehl.png" alt="Twitter">
+                    More
+                </a>
+                
+                <br><br>
+                <input type = "button"  id = "tweet-left-col" class = "texx" value = "Tweet" data-toggle="modal" data-target="#tweetmodal" >
+
+                <a class = "foote popover-dismiss" data-html='true' tabindex="0" data-toggle="popover" data-placement="top" data-content="<a class = 'logoutpopover texx' href='http://barathdandu-com.stackstaging.com/twitter/index.php?name=lauda'>Log Out</a>.">      
+                    <img class = "profilepicleft" src="http://barathdandu-com.stackstaging.com<?php echo $piclocation ?>" > 
+                    <div class = "data">
+                        <span class="name"> <?php echo $name ?></span> 
+                        <span class="usernametext"><?php echo '@'.$username ?></span> 
+                    </div>
+                    <img class = "treedots" src="http://barathdandu-com.stackstaging.com/twitter/images/treedotswhitelogo.png" > 
+                    <img class = "treedots hovlogo" src="http://barathdandu-com.stackstaging.com/twitter/images/tdh.png" >   
+                </a>
+            
+            </div>
         
         </div>
     
         <div class="col-5">
         
-            
+            <div id="HomeDiv" >Home Div</div>
+
+            <div id="ExploreDiv">explorediv</div>
+
+            <div id="NotificationsDiv">notificationsdiv</div>
+
+            <div id="MessagesDiv">messagesdiv</div>
+
+            <div id="BookmarksDiv">bookmarksdiv</div>
+
+            <div id="ListsDiv">listsdiv</div>
+
+            <div id="<?php echo $username.'Div'?>" class = "ProfileDiv" style = "margin: 0; padding: 0;">
+               
+                <div id="header" style = "margin: 0;padding: 0; border-bottom:1px solid rgba(110, 118, 125, 0.5) ;">
+                    <div class = "left-col" style=" padding: 0.7vh 1.3vh 1.2vh 1.3vh;margin: 0.4vh 1vh;">
+                        <img style = "height:1.5vh" src="http://barathdandu-com.stackstaging.com/twitter/images/backbutton.png" alt="Twitter">
+                        <img style = "height:1.5vh" class = "hovlogo" src="http://barathdandu-com.stackstaging.com/twitter/images/backbuttonblue.png" alt="Twitter">
+                    </div>
+                    <div class = "data" style = "margin:1vh 0.4vh 0.1h 0.4vh;padding: 0;">
+                        <span class="name" style = "margin:0vh;padding: 0;line-height: 2vh; font-size: 2.2vh;"> <?php echo $name ?></span> 
+                        <span class="usernametext" style = "margin:0vh;padding: 0;line-height: 1.7vh;">0 Tweets</span> 
+                    </div>  
+                </div>
+
+                <div style = "height: 21vh; background-color: #2F3336;">
+                    <img class = "profilepic" src="http://barathdandu-com.stackstaging.com<?php echo $piclocation ?>" > 
+                </div>
+                <div style = "border: #fff 1px solid ;">
+                    <input type = "button"  id = "setUpProfile" value = "Set up profile" data-toggle="modal" data-target="#setupprofilemodal" >
+                </div>
+            </div>
+        
+            <div id="MoreDiv">morediv</div>
 
         </div>
 
-        <div class="col-4">col-4</div>
+        <!-- Modal -->
+        <div class="modal" id="setupprofilemodal" tabindex="-1" >
+            <div class="modal-dialog modal-lg" style = "margin-top: 15vh;">
+                <div class="modal-content">
+                    <div class="modal-header" style="position: relative;">
+                        <button type="button" style="position: absolute;" class="modalclose" data-dismiss="modal">
+                            <span >&times;</span>
+                        </button>
+                        <img style = "margin: auto; margin-top: 2vh;" class = "log" src="http://barathdandu-com.stackstaging.com/twitter/images/logowhiteonblack.png" alt="Twitter">
+                    </div>
+                    <div class="modal-body">
+                        <div style="clear: both;  border: #fff 1px solid; padding: 2vh;" >
+                            <div style = " font-family: 'Work Sans', sans-serif; font-weight: 900; font-size:2.8vh;">Pick a profile picture</div> 
+                            <div style = " font-size: 1.5vh;color: #6E767D; ">Have a favorite selfie? Upload it now.</div>                     
+                        </div>
+                        <div style=" border: rgb(133, 24, 24) 1px solid; width: 100%;" >
+                            <img class = "profilepicedit" src="http://barathdandu-com.stackstaging.com<?php echo $piclocation ?>" > 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-4">
+
+            <div class="lds-dual-ring"></div>
+
+        </div>
 
     </div>   
 </div>
@@ -531,69 +255,100 @@
     <script>
 
         var getVar = "<?php echo $_GET['page'] ?>"; 
-        var selectedPage = '';
+        var selectedButton = '';
         var initCallPage = ''
         if(getVar == ''){
-            selectedPage = "#home";
             initCallPage = "home";
+            selectedButton = "#Home";
+            selectedDiv = "#HomeDiv";
         }else{
-            selectedPage = "#"+getVar;
-            initCallPage = getVar;
+            initCallPage = getVar.charAt(0).toUpperCase() + getVar.slice(1);
+            selectedButton = "#"+initCallPage;
+            const nonProfileDiv = ["Home","Explore", "Notifications", "Messages", "Bookmarks", "Lists", "More"];
+            if(nonProfileDiv.includes(initCallPage)){
+                selectedDiv = "#"+initCallPage+"Div";
+            }
+            else{
+                selectedDiv = ".ProfileDiv";
+            }
         }
+
         $(document).ready(function(){
+            //alert(initCallPage);
+            $(document).attr("title", initCallPage);
 
-            $.getJSON("http://barathdandu-com.stackstaging.com/twitter/ajax.php", {call_Page: initCallPage}, function(data, textStatus, xhr){
-
-                console.log(data);
-
-                $(document).attr("title", data.title);
-                $(document).find('meta[name=description]').attr('content', data.description);
-
-                $(document).find('.col-5').html(data.data);
-
-                //window.history.pushState("","","http://barathdandu-com.stackstaging.com/twitter/"+ data.url);
-            });
+            ajaxCall(initCallPage.toLowerCase());
             
-            
-            $(selectedPage).hide();
-            $(selectedPage+"Pressed").show()
+            $(selectedButton).hide();
+            $(selectedButton+"Pressed").show();
+            $(selectedDiv).show();
         
         });
-
         
         $(".tex").click(function(e){
             e.preventDefault(); 
 
             var str = "#"+this.id;
 
-            if(!(str.includes(selectedPage))){
+            if(!(str.includes(selectedButton))){
             
-                prevSelected(selectedPage);
-                selectedPage = "#" + this.id;
-
-                $(selectedPage).hide();
-                $(selectedPage+"Pressed").show()
-                
+                prevSelected(selectedButton, selectedDiv);
                 var call_Page = this.id;
+                selectedButton = "#" + this.id;
+                selectedDiv = "#" + this.id + "Div";
 
-                $.getJSON("http://barathdandu-com.stackstaging.com/twitter/ajax.php", {call_Page: call_Page}, function(data, textStatus, xhr){
-
-                    console.log(data);
-
-                    window.history.pushState("","","http://barathdandu-com.stackstaging.com/twitter/"+ data.url);
-
-                    $(document).attr("title", data.title);
-                    $(document).find('meta[name=description]').attr('content', data.description);
-
-                    $(document).find('.col-5').html(data.data);
-
-                });
+                $(selectedButton).hide();
+                $(selectedButton+"Pressed").show()
+                $(selectedDiv).show();
+                
+                window.history.pushState("","","http://barathdandu-com.stackstaging.com/twitter/"+ this.id);
+                $(document).attr("title", this.id);
+                
+                ajaxCall(this.id.toLowerCase());
             }
         });
 
-        function prevSelected(selectedPage){
-            $(selectedPage+"Pressed").hide()
-            $(selectedPage).show();
+        function ajaxCall(call_Page){
+            //alert(call_Page);
+            if(call_Page == "Home"){
+                $.getJSON("http://barathdandu-com.stackstaging.com/twitter/ajax.php", {call_Page: call_Page}, function(data, textStatus, xhr){
+                    console.log(data);
+                });
+            }else if(call_Page == "Explore"){
+                $.getJSON("http://barathdandu-com.stackstaging.com/twitter/ajax.php", {call_Page: call_Page}, function(data, textStatus, xhr){
+                    console.log(data);
+                });
+            }else if(call_Page == "Notifications"){
+                $.getJSON("http://barathdandu-com.stackstaging.com/twitter/ajax.php", {call_Page: call_Page}, function(data, textStatus, xhr){
+                    console.log(data);
+                });
+            }else if(call_Page == "Messages"){
+                $.getJSON("http://barathdandu-com.stackstaging.com/twitter/ajax.php", {call_Page: call_Page}, function(data, textStatus, xhr){
+                    console.log(data);
+                });
+            }else if(call_Page == "Bookmarks"){
+                $.getJSON("http://barathdandu-com.stackstaging.com/twitter/ajax.php", {call_Page: call_Page}, function(data, textStatus, xhr){
+                    console.log(data);
+                });
+            }else if(call_Page == "Lists"){
+                $.getJSON("http://barathdandu-com.stackstaging.com/twitter/ajax.php", {call_Page: call_Page}, function(data, textStatus, xhr){
+                    console.log(data);
+                });
+            }else if(call_Page == "More"){
+                $.getJSON("http://barathdandu-com.stackstaging.com/twitter/ajax.php", {call_Page: call_Page}, function(data, textStatus, xhr){
+                    console.log(data);
+                });
+            }else{
+                $.getJSON("http://barathdandu-com.stackstaging.com/twitter/ajax.php", {call_Page: call_Page}, function(data, textStatus, xhr){
+                    console.log(data);
+                });
+            }
+        }
+
+        function prevSelected(selectedButton, selectedDiv){
+            $(selectedButton+"Pressed").hide()
+            $(selectedButton).show();
+            $(selectedDiv).hide();
         };
 
         $(".left-col").hover(function(){

@@ -5,7 +5,7 @@ $error = "";
 if((array_key_exists("email", $_COOKIE) AND $_COOKIE['email'])){
         session_start();
         $_SESSION['email'] = $_COOKIE['email'];
-        header("Location: http://barathdandu-com.stackstaging.com/twitter/home"); 
+        header("Location: http://barathdandu-com.stackstaging.com/twitter/"); 
     }
 
     if($_POST['sub']=='sb'){
@@ -33,7 +33,7 @@ if((array_key_exists("email", $_COOKIE) AND $_COOKIE['email'])){
                     setcookie("email", $row['email'], time() + 60*60*24*365);             
                 
                 }
-                header("Location: http://barathdandu-com.stackstaging.com/twitter/home"); 
+                header("Location: http://barathdandu-com.stackstaging.com/twitter/"); 
                 exit();
 
             } else {

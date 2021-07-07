@@ -7,7 +7,7 @@ if(array_key_exists("email", $_COOKIE) && $_COOKIE['email']){
 
 if(array_key_exists("email", $_SESSION) && $_SESSION['email']){
     
-    header("Location: http://barathdandu-com.stackstaging.com/twitter/home"); 
+    header("Location: http://barathdandu-com.stackstaging.com/twitter/"); 
 }
 
 ?>
