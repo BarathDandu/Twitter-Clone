@@ -300,16 +300,18 @@ a:hover{
     display: block;
     margin:0.5vh 1vh;
     width: 98%;
-    height: 12vh;
-    resize: both;
-    min-height: 40px;
+    min-height: 15vh;
     line-height: 20px;
     border:none;
     resize: none;
     color: #fff;
     outline: none;
-    color:#fff;
     font-size: 1.1vw;
+}
+
+.focusBlue:focus{
+    border:solid 2px #1DA1F2;
+    border-radius: 8px;
 }
 
 #mediaicon{
@@ -478,7 +480,7 @@ a:hover{
     background-color:#1DA1F2; 
     color: #fff;
     border-radius: 40px;
-    padding: 0.7vh 6.5vw ;              
+    padding: 0.7vh 6vw ;              
     margin: 1.5vh auto;
     display: block;
     float: left;
@@ -778,22 +780,37 @@ a:hover{
                         </div>
                         <div style=" border: rgb(33, 133, 24) 1px solid; width: 100%; display: flex; justify-content: center;">
                             <input type = "button" value = "Back" class = "skipfornow1" id = "backToPage1" style = "background-color:#6E767D;">
-                            <input type = "button" value = "Next" class = "skipfornow1">
+                            <input type = "button" value = "Next" class = "skipfornow1" id = "page2NextBtn">
                         </div>
 
                     </div>
                     <div id="setupPage3" style="display: none;">
                         
-                        <div style="clear: both;  border: #fff 1px solid; padding: 2vh;" >
+                        <div style="clear: both;   padding: 2vh;" >
                             <div style = " font-family: 'Work Sans', sans-serif; font-weight: 900; font-size:2.8vh;">Describe yourself</div> 
                             <div style = " font-size: 1.5vh;color: #6E767D; ">What makes you special? dont think too hard, just have fun with it.</div>                     
                         </div>
-                        <div style=" border: rgb(133, 24, 24) 1px solid; width: 100%;" >
-                            
+                        <div style="  width: 100%;" >
+                            <div style="float: left; clear: both; width: 98%;">
+                                <input style = "background-color:  rgba(34, 34, 34, 0.5); color: #fff; float: left; clear: both;width:98%; margin:1vh; outline: none;border-radius: 5px; padding: 1vh 1vh;" type="text" class="focusBlue" id="name" name = "name" placeholder="Name" >
+                                <div id = "n" style = "margin:0 1vh 1vh 2vh;" class="invalid-feedback">
+                                    Please enter your name.
+                                </div>
+                                <div id = "nw" style = "margin:0 1vh 1vh 2vh;" class="invalid-feedback">
+                                    Please enter your name without special characters or numbers.
+                                </div>
+                                <div id = "nlen" style = "margin:0 1vh 1vh 2vh;" class="invalid-feedback">
+                                    Please enter a name that does not exceed 10 characters.
+                                </div>
+                            </div>
+                            <div id = "te" style = "width:98%;height:auto;float: left; clear: both;">
+                                <textarea id = "textAreaid"  maxlength="160" class="textarea focusBlue" style = " padding:1vh; background-color: rgba(34, 34, 34, 0.5); min-height:12vh; max-height: 12vh; overflow:auto; font-size: 100%;" role="textbox" contenteditable="true" placeholder="Your bio"></textarea>
+                            </div>
+                            <div id = "textAreaCount" style="margin:0 1vh 1vh 2vh;;padding: 0; color: rgba(110, 118, 125, 0.5); line-height: 1.5vh;">0/160</div>
                         </div>
-                        <div style=" border: rgb(33, 133, 24) 1px solid; width: 100%; display: flex; justify-content: center;">
-                            <input type = "button" value = "Back" class = "skipfornow1" id = "backToPage1" style = "background-color:#6E767D;">
-                            <input type = "button" value = "Next" class = "skipfornow1">
+                        <div style=" width: 100%; display: flex; justify-content: center;">
+                            <input type = "button" value = "Back" class = "skipfornow1" id = "backToPage2" style = "background-color:#6E767D;">
+                            <input type = "button" value = "Done" class = "skipfornow1" id = "doneEditprofile">
                         </div>
 
                     </div>
@@ -1030,13 +1047,48 @@ a:hover{
             $("#setupPage1").show();
         });
 
+        $("#doneEditprofile").click(function(event){
+            if(  $("#name").val() == "" ){
+            nameerror = 1;  
+            $("#n").css("display", "block");
+            $("#nw").css("display", "none");
+            $("#nlen").css("display", "none");
+            }else{
+                if($("#name").val().length > 10){
+                    nameerror = 1;
+                    $("#nlen").css("display", "block");
+                    $("#n").css("display", "none");
+                    $("#nw").css("display", "none");
+                }else{
+                    if (/^([a-zA-Z]+\s)*[a-zA-Z]+$/.test($("#name").val()) ) {
+                        nameerror = 0;
+                        $("#nw").css("display", "none");
+                        $("#nlen").css("display", "none");
+                        $("#n").css("display", "none");
+                    }else{
+                        nameerror = 1;
+                        $("#nw").css("display", "block");
+                        $("#nlen").css("display", "none");
+                        $("#n").css("display", "none");
+                    }
+                }
+            }
+        });
+
         $("#backToPage1").click(function(event){
             $("#setupPage2").hide();
             $("#setupPage1").show();
             if($('#profilepicedit').attr('src') == "http://barathdandu-com.stackstaging.com/twitter/images/userIcon.png"){
                 $("#selectPicCancel").hide();
             }
+        });
 
+        $("#backToPage2").click(function(event){
+            $("#setupPage3").hide();
+            $("#setupPage2").show();
+            if($('#bannerPicEdit').attr('src') == "http://barathdandu-com.stackstaging.com/twitter/images/600x200.png"){
+                $("#selectPicCancel1").hide();
+            }
         });
 
         $(".skipfornow").click(function(event){
@@ -1048,7 +1100,12 @@ a:hover{
             }
             //alert($("#profilepicedit").attr("src"));
         });
-        
+
+        $("#page2NextBtn").click(function(event){
+            $("#setupPage2").hide();
+            $("#setupPage3").show();
+        });
+
         $("#selectPicCancel").click(function(event){
             $("#selectPicCancel").hide();
             $("#profilePicInp").val('');
@@ -1059,6 +1116,16 @@ a:hover{
             $("#selectPicCancel1").hide();
             $("#bannerPicEdit").val('');
             document.getElementById("bannerPicEdit").src= "http://barathdandu-com.stackstaging.com/twitter/images/600x200.png";
+        });
+
+        const messageEle = document.getElementById('textAreaid');
+        const counterEle = document.getElementById('textAreaCount');
+
+        messageEle.addEventListener('input', function(e) {
+            const target = e.target;
+
+            const currentLength = target.value.length;
+            counterEle.innerHTML = `${currentLength}/160`;
         });
 
         $(window).resize(function() {

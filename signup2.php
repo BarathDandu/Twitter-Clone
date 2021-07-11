@@ -144,6 +144,7 @@
         .form-control:focus {
             background-color: #000000;
             color: white;
+            border:solid 1px #1DA1F2;
         }
         #signupbtn{
             background-color:hsla(203, 89%, 53%, 1); 
@@ -193,7 +194,7 @@
                     Please enter your name without special characters or numbers.
                 </div>
                 <div id = "nlen" class="invalid-feedback">
-                    Please enter a username that does not exceed 10 characters.
+                    Please enter a name that does not exceed 10 characters.
                 </div>
                 <label style="text-align:left;margin-top:1vh;" for="username">Username:</label>
                 <input type="text" class="form-control" id="username" name = "username" placeholder="Username" >
