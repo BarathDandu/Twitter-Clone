@@ -1048,6 +1048,10 @@ a:hover{
         });
 
         $("#doneEditprofile").click(function(event){
+            event.preventDefault();
+
+            var nameerror;
+
             if(  $("#name").val() == "" ){
             nameerror = 1;  
             $("#n").css("display", "block");
@@ -1073,6 +1077,53 @@ a:hover{
                     }
                 }
             }
+            if(nameerror == 0){
+                //$("#processing").show();
+                if(profilepicedit.src == "http://barathdandu-com.stackstaging.com/twitter/images/userIcon.png"){
+                    $.ajax({
+                        url:'http://barathdandu-com.stackstaging.com/twitter/upload.php/',
+                        method:'POST',
+                        data:{name: $("#name").val()},
+                        success:function(data)
+                        {
+                            
+                        },
+                        error: function(xhr, status, error) {
+                            var err = eval("(" + xhr.responseText + ")");
+                            alert(err.Message);
+                        }
+                    });
+                }else{
+                    var img = new Image;
+                    img.src = profilepicedit.src;
+                    img.onload = function (event) {
+                        const canvas = document.createElement("canvas");
+                        const maxWidth = 300;
+
+                        const scaleSize = maxWidth / img.width;
+                        canvas.width = maxWidth;
+                        canvas.height = img.height * scaleSize;
+
+                        const ctx = canvas.getContext("2d");
+                        ctx.drawImage(img, 0 , 0 , canvas.width, canvas.height);
+                        const srcEncoded = ctx.canvas.toDataURL(img, "image/png"); 
+                        
+                        $.ajax({
+                            url:'http://barathdandu-com.stackstaging.com/twitter/upload.php/',
+                            method:'POST',
+                            data:{image: srcEncoded, name: $("#name").val()},
+                            success:function(data)
+                            {
+                                
+                            },
+                            error: function(xhr, status, error) {
+                                var err = eval("(" + xhr.responseText + ")");
+                                alert(err.Message);
+                            }
+                        });
+                    };
+                }
+            } 
         });
 
         $("#backToPage1").click(function(event){
