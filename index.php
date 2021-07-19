@@ -1,8 +1,10 @@
 <?php
 
-$piclocation = '';
 $username = '';
 $name = '';
+$piclocation = '';
+$bannerlocation = '';
+$description = '';
 
 if($_GET['name']=='lauda'){
 
@@ -32,16 +34,20 @@ if($_GET['name']=='lauda'){
             die("Error connecting to Database");
         }
     
-        $query = "SELECT `name`, `username`, `piclocation` FROM `twitter` WHERE email = '".mysqli_real_escape_string($link, $_SESSION['email'])."' LIMIT 1";
+        $query = "SELECT `name`, `username`, `piclocation`,`bannerlocation`,`description` FROM `twitter` WHERE email = '".mysqli_real_escape_string($link, $_SESSION['email'])."' LIMIT 1";
     
         $row = mysqli_fetch_array(mysqli_query($link, $query));
     
-        $piclocation .= $row['piclocation'];
-
         $username .= $row['username'];
-
+        
         $name .= $row['name'];
+        
+        $piclocation .= $row['piclocation'];
             
+        $bannerlocation .= $row['bannerlocation'];
+        
+        $description .= $row['description'];
+
     }else{
         header("Location: http://barathdandu-com.stackstaging.com/twitter/welcome.php"); 
         exit();

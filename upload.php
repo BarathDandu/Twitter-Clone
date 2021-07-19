@@ -73,12 +73,78 @@ if(array_key_exists("email", $_SESSION) && $_SESSION['email']){
                 }
             }     
         }
-    }else if(){
+    }
+    else if(isset($_POST['naam'])){
+
+        $profilePicLoc = "/twitter/images/userIcon.png";
+        $bannerPicLoc = "/twitter/images/600x200.png";
+
+        if($_POST['profileEdit'] != "http://barathdandu-com.stackstaging.com/twitter/images/userIcon.png"){
+
+            echo "profilepic";
+            
+            $data = $_POST['profileEdit'];
+
+            $image_array_1 = explode(";", $data);
+
+            $image_array_2 = explode(",", $image_array_1[1]);
+
+            $decodedData = base64_decode($image_array_2[1]);
+
+            $filename = '/public_html/twitter/upload/' . time() . '.png';
+            $ech =  explode("public_html", $filename);
+                
+            $cid = ftp_connect("ftp.stackcp.com") or die("Couldn't connect to $ftp_host");
+            ftp_login($cid, "barathdandu.com", "c00b6407346c" )or die("Couldn't login to ftp server");
+            ftp_pasv($cid, true);    
+                
+            file_put_contents('/tmp/image.jpg', $decodedData);
+
+            if (ftp_put($cid, $filename , '/tmp/image.jpg', FTP_ASCII)) {
+                
+                $profilePicLoc = $ech[1];
+
+            }
+        }
+
+        if($_POST['bannerEdit'] != "http://barathdandu-com.stackstaging.com/twitter/images/600x200.png"){
+
+            echo "bannerpic";
+            
+            $data = $_POST['bannerEdit'];
+
+            $image_array_1 = explode(";", $data);
+
+            $image_array_2 = explode(",", $image_array_1[1]);
+
+            $decodedData = base64_decode($image_array_2[1]);
+
+            $filename = '/public_html/twitter/upload/' . time() . '.png';
+            $ech =  explode("public_html", $filename);
+                
+            $cid = ftp_connect("ftp.stackcp.com") or die("Couldn't connect to $ftp_host");
+            ftp_login($cid, "barathdandu.com", "c00b6407346c" )or die("Couldn't login to ftp server");
+            ftp_pasv($cid, true);    
+                
+            file_put_contents('/tmp/image.jpg', $decodedData);
+
+            if (ftp_put($cid, $filename , '/tmp/image.jpg', FTP_ASCII)) {
+                
+                $bannerPicLoc = $ech[1];
+
+            }
+        }
         
+        $query = "UPDATE `twitter` SET `name`= '".mysqli_real_escape_string($link, $_POST['naam'])."',`description`= '".mysqli_real_escape_string($link, $_POST['bio'])."',`piclocation`= '".$profilePicLoc."',`bannerlocation`= '".$bannerPicLoc."' WHERE email = '".$_SESSION['email']."' LIMIT 1";
+    
+        //echo $query;
+        
+        if(mysqli_query($link, $query)){
+            echo "<div class='alert alert-success' role='alert'>You have been signed up!<br></div>";
+        }
+        else{
+            echo "<div class='alert alert-danger' role='alert'>There was an error signing you up.<br> Please try again later</div>";
+        }
     }  
 }
 ?>
-
-
-
-

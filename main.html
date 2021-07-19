@@ -695,7 +695,7 @@ a:hover{
                 </div>
                 <div>
                     <img class = "profilepic" src="http://barathdandu-com.stackstaging.com<?php echo $piclocation ?>" > 
-                    <img src = "http://barathdandu-com.stackstaging.com/twitter/images/600x200.png" style = "width:100%; border:rgb(212, 0, 255) solid 1px;">
+                    <img src = "http://barathdandu-com.stackstaging.com<?php echo $bannerlocation ?>" style = "width:100%; border:rgb(212, 0, 255) solid 1px;">
                 </div>
                 <div style = "border: #fff 1px solid ;">
                     <input type = "button"  id = "setUpProfile" value = "Set up profile" data-toggle="modal" data-target="#setupprofilemodal" >
@@ -775,7 +775,7 @@ a:hover{
                             </div>
                             <div>
                                 <img id = "bannerProfilepic" class = "profilepic" src="" > 
-                                <img id = "bannerPicEdit" src = "http://barathdandu-com.stackstaging.com/twitter/images/600x200.png" style = "width:100%;margin-bottom: 20vh; border:rgb(212, 0, 255) solid 1px;">
+                                <img id = "bannerPicEdit" src = "http://barathdandu-com.stackstaging.com<?php echo $bannerlocation ?>" style = "width:100%;margin-bottom: 20vh; border:rgb(212, 0, 255) solid 1px;">
                             </div>
                         </div>
                         <div style=" border: rgb(33, 133, 24) 1px solid; width: 100%; display: flex; justify-content: center;">
@@ -852,7 +852,7 @@ a:hover{
             //alert(initCallPage);
             $(document).attr("title", initCallPage.charAt(0).toUpperCase() + initCallPage.slice(1));
 
-            ajaxCall(initCallPage);
+            jsonCall(initCallPage);
             
             $(selectedButton).hide();
             $(selectedButton+"Pressed").show();
@@ -886,11 +886,11 @@ a:hover{
                 window.history.pushState("","","http://barathdandu-com.stackstaging.com/twitter/"+ this.id);
                 $(document).attr("title", (this.id).charAt(0).toUpperCase() + (this.id).slice(1));
                 
-                ajaxCall(this.id);
+                jsonCall(this.id);
             }
         });
 
-        function ajaxCall(call_Page){
+        function jsonCall(call_Page){
             //alert(call_Page);
             if(call_Page == "home"){
                 $.getJSON("http://barathdandu-com.stackstaging.com/twitter/ajax.php", {call_Page: call_Page}, function(data, textStatus, xhr){
@@ -1078,53 +1078,28 @@ a:hover{
                 }
             }
             if(nameerror == 0){
-                //$("#processing").show();
-                if(profilepicedit.src == "http://barathdandu-com.stackstaging.com/twitter/images/userIcon.png"){
-                    $.ajax({
-                        url:'http://barathdandu-com.stackstaging.com/twitter/upload.php/',
-                        method:'POST',
-                        data:{name: $("#name").val()},
-                        success:function(data)
-                        {
-                            
-                        },
-                        error: function(xhr, status, error) {
-                            var err = eval("(" + xhr.responseText + ")");
-                            alert(err.Message);
-                        }
-                    });
-                }else{
-                    var img = new Image;
-                    img.src = profilepicedit.src;
-                    img.onload = function (event) {
-                        const canvas = document.createElement("canvas");
-                        const maxWidth = 300;
-
-                        const scaleSize = maxWidth / img.width;
-                        canvas.width = maxWidth;
-                        canvas.height = img.height * scaleSize;
-
-                        const ctx = canvas.getContext("2d");
-                        ctx.drawImage(img, 0 , 0 , canvas.width, canvas.height);
-                        const srcEncoded = ctx.canvas.toDataURL(img, "image/png"); 
-                        
-                        $.ajax({
-                            url:'http://barathdandu-com.stackstaging.com/twitter/upload.php/',
-                            method:'POST',
-                            data:{image: srcEncoded, name: $("#name").val()},
-                            success:function(data)
-                            {
-                                
-                            },
-                            error: function(xhr, status, error) {
-                                var err = eval("(" + xhr.responseText + ")");
-                                alert(err.Message);
-                            }
-                        });
-                    };
-                }
+               
+              
+                srcEncodedBannerPic = bannerPicEdit.src;
+                srcEncodedProfilePic = profilepicedit.src;
+                //alert($('#textAreaid').val());
+                $.ajax({
+                    url:'http://barathdandu-com.stackstaging.com/twitter/upload.php/',
+                    method:'POST',
+                    data:{profileEdit: srcEncodedProfilePic, bannerEdit: srcEncodedBannerPic, naam: $("#name").val(), bio: $('#textAreaid').val()},
+                    success:function(data)
+                    {
+                        alert(data);
+                    },
+                    error: function(xhr, status, error) {
+                        var err = eval("(" + xhr.responseText + ")");
+                        alert(err.Message);
+                    }
+                });  
             } 
         });
+
+
 
         $("#backToPage1").click(function(event){
             $("#setupPage2").hide();
@@ -1149,12 +1124,39 @@ a:hover{
             if(currentBannerPic == "http://barathdandu-com.stackstaging.com/twitter/images/600x200.png"){
                 $("#selectPicCancel1").hide();
             }
+            if(!profilepicedit.src.startsWith("http")){
+                   var img = new Image;
+                   img.src = profilepicedit.src;
+                   img.onload = function (event) {
+                        canvas = document.createElement("canvas");
+                        canvas.width = 300;
+                        canvas.height = 300;
+
+                        ctx = canvas.getContext("2d");
+                        ctx.drawImage(img, 0 , 0 , canvas.width, canvas.height);
+                        profilepicedit.src = ctx.canvas.toDataURL(img, "image/png"); 
+                    }
+                }
             //alert($("#profilepicedit").attr("src"));
         });
 
         $("#page2NextBtn").click(function(event){
             $("#setupPage2").hide();
             $("#setupPage3").show();
+            if(!bannerPicEdit.src.startsWith("http") ){
+                alert(bannerPicEdit.src);
+                var img = new Image;
+                img.src = bannerPicEdit.src;
+                img.onload = function (event) {
+                    canvas = document.createElement("canvas");   
+                    canvas.width = 600;
+                    canvas.height = 200;
+
+                    ctx = canvas.getContext("2d");
+                    ctx.drawImage(img, 0 , 0 , canvas.width, canvas.height);
+                    bannerPicEdit.src = ctx.canvas.toDataURL(img, "image/png"); 
+                };
+            }
         });
 
         $("#selectPicCancel").click(function(event){
