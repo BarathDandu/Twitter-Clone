@@ -265,6 +265,7 @@ a:hover{
     background-color: #000;
     border-bottom-color: #000;
     padding: 0;
+    border: none;
 }
 
 .tweetmodalbtn{
@@ -293,7 +294,7 @@ a:hover{
       
 .modal-content {
     border-radius: 15px !important;
-    border: 6px solid black!important;
+    border: 10px solid rgb(0, 0, 0)!important;
 }
       
 .textarea{
@@ -365,17 +366,17 @@ a:hover{
 
 .lds-dual-ring {
     display: inline-block;
-    width: 80px;
-    height: 80px;
+    width: 1vh;
+    height: 1vh;
 }
 .lds-dual-ring:after {
     content: " ";
     display: block;
-    width: 64px;
-    height: 64px;
+    width: 3vh;
+    height: 3vh;
     margin: 8px;
     border-radius: 50%;
-    border: 6px solid #1DA1F2;
+    border: 3px solid #1DA1F2;
     border-color: #1DA1F2 transparent #1DA1F2 transparent;
     animation: lds-dual-ring 1.2s linear infinite;
 }
@@ -508,6 +509,9 @@ a:hover{
 <body>
 
 <div class="container">
+    
+    <div id = "centerLoadingRing" class="lds-dual-ring" style = "position: fixed; top:42%; left: 49%; z-index: 1051; display: none;"></div>
+
     <div class="row">
         <div class="col-3">
 
@@ -709,7 +713,6 @@ a:hover{
         
         <div class="col-4">
 
-            <div class="lds-dual-ring"></div>
 
         </div>
 
@@ -727,12 +730,12 @@ a:hover{
                 </div>
                 <div class="modal-body">
                     <div id = "setupPage1">
-                        <div style="clear: both;  border: #fff 1px solid; padding: 2vh;" >
+                        <div style="clear: both;   padding: 2vh;" >
                             <div style = " font-family: 'Work Sans', sans-serif; font-weight: 900; font-size:2.8vh;">Pick a profile picture</div> 
                             <div style = " font-size: 1.5vh;color: #6E767D; ">Have a favorite selfie? Upload it now.</div>                     
                         </div>
-                        <div style=" border: rgb(133, 24, 24) 1px solid; width: 100%;" >
-                            <div style=" border: rgb(255, 255, 255) 1px solid; width: 100%;display: flex; justify-content: center; margin-top: 15.5vh; padding-right: 3.5%; position: absolute;">
+                        <div style=" border-top: rgba(117, 117, 117, 0.5) 1px solid; border-bottom: rgba(117, 117, 117, 0.5) 1px solid; width: 100%;" >
+                            <div style="  width: 100%;display: flex; justify-content: center; margin-top: 15.5vh; padding-right: 3.5%; position: absolute;">
                                 <label  id = "initcrop" for = "profilePicInp" class = "profilepicdiv" style = "display: flex; justify-content: center;margin:0 1vh;" >  
                                     <img class = "setupprofilecamclose" src="http://barathdandu-com.stackstaging.com/twitter/images/cameraIcon.png" > 
                                 </label>
@@ -743,7 +746,7 @@ a:hover{
                             </div>
                             <img id = "profilepicedit" src="http://barathdandu-com.stackstaging.com<?php echo $piclocation ?>" > 
                         </div>
-                        <div style=" border: rgb(33, 133, 24) 1px solid; width: 100%;">
+                        <div style="  width: 100%;">
                             <input type = "button" value = "Next" class = "skipfornow">
                         </div>
                     </div>
@@ -759,12 +762,12 @@ a:hover{
                     </div>
                     <div id="setupPage2" style="display: none;">
                         
-                        <div style="clear: both;  border: #fff 1px solid; padding: 2vh;" >
+                        <div style="clear: both;  padding: 2vh;" >
                             <div style = " font-family: 'Work Sans', sans-serif; font-weight: 900; font-size:2.8vh;">Pick a Header</div> 
                             <div style = " font-size: 1.5vh;color: #6E767D; ">People who visit your profile will see it. Show your style.</div>                     
                         </div>
-                        <div style=" border: rgb(133, 24, 24) 1px solid; width: 100%;" >
-                            <div style=" border: rgb(255, 255, 255) 1px solid; width: 100%;display: flex; justify-content: center; margin-top: 12%; padding-right: 3.5%; position: absolute;">
+                        <div style=" border-top: rgba(117, 117, 117, 0.5) 1px solid; border-bottom: rgba(117, 117, 117, 0.5) 1px solid; width: 100%;" >
+                            <div style="  width: 100%;display: flex; justify-content: center; margin-top: 12%; padding-right: 3.5%; position: absolute;">
                                 <label  id = "initcrop1" for = "profilePicInp1" class = "profilepicdiv" style = "display: flex; justify-content: center;margin:0 1vh;" >  
                                     <img class = "setupprofilecamclose" src="http://barathdandu-com.stackstaging.com/twitter/images/cameraIcon.png" > 
                                 </label>
@@ -775,10 +778,10 @@ a:hover{
                             </div>
                             <div>
                                 <img id = "bannerProfilepic" class = "profilepic" src="" > 
-                                <img id = "bannerPicEdit" src = "http://barathdandu-com.stackstaging.com<?php echo $bannerlocation ?>" style = "width:100%;margin-bottom: 20vh; border:rgb(212, 0, 255) solid 1px;">
+                                <img id = "bannerPicEdit" src = "http://barathdandu-com.stackstaging.com<?php echo $bannerlocation ?>" style = "width:100%;margin-bottom: 20vh;">
                             </div>
                         </div>
-                        <div style=" border: rgb(33, 133, 24) 1px solid; width: 100%; display: flex; justify-content: center;">
+                        <div style="  width: 100%; display: flex; justify-content: center;">
                             <input type = "button" value = "Back" class = "skipfornow1" id = "backToPage1" style = "background-color:#6E767D;">
                             <input type = "button" value = "Next" class = "skipfornow1" id = "page2NextBtn">
                         </div>
@@ -858,12 +861,38 @@ a:hover{
             $(selectedButton+"Pressed").show();
             $(selectedDiv).show();
 
+            
             if(currentProfilePic == "http://barathdandu-com.stackstaging.com/twitter/images/userIcon.png"){
                 $("#selectPicCancel").hide();
             }
             if(currentBannerPic == "http://barathdandu-com.stackstaging.com/twitter/images/600x200.png"){
                 $("#selectPicCancel1").hide();
             }
+        
+        });
+
+        window.addEventListener('popstate', function (event) {
+            prevSelected(selectedButton, selectedDiv);
+            
+            const myArr = location.href.split("twitter/");
+
+            initCallPage = myArr[1];
+            selectedButton = "#"+initCallPage;
+            const nonProfileDiv = ["home","explore", "notifications", "messages", "bookmarks", "lists", "more"];
+            if(nonProfileDiv.includes(initCallPage)){
+                selectedDiv = "#"+initCallPage+"Div";
+            }
+            else{
+                selectedDiv = ".profileDiv";
+            }
+
+            $(document).attr("title", initCallPage.charAt(0).toUpperCase() + initCallPage.slice(1));
+
+            jsonCall(initCallPage);
+            
+            $(selectedButton).hide();
+            $(selectedButton+"Pressed").show();
+            $(selectedDiv).show();
 
         });
         
@@ -1079,9 +1108,9 @@ a:hover{
             }
             if(nameerror == 0){
                
-              
-                srcEncodedBannerPic = bannerPicEdit.src;
+                $("#centerLoadingRing").show();
                 srcEncodedProfilePic = profilepicedit.src;
+                srcEncodedBannerPic = bannerPicEdit.src;
                 //alert($('#textAreaid').val());
                 $.ajax({
                     url:'http://barathdandu-com.stackstaging.com/twitter/upload.php/',
@@ -1089,7 +1118,10 @@ a:hover{
                     data:{profileEdit: srcEncodedProfilePic, bannerEdit: srcEncodedBannerPic, naam: $("#name").val(), bio: $('#textAreaid').val()},
                     success:function(data)
                     {
-                        alert(data);
+                        if(data == "succ"){
+                            $("#centerLoadingRing").hide();
+                            location.reload();  
+                        }
                     },
                     error: function(xhr, status, error) {
                         var err = eval("(" + xhr.responseText + ")");

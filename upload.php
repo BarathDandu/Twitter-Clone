@@ -76,12 +76,9 @@ if(array_key_exists("email", $_SESSION) && $_SESSION['email']){
     }
     else if(isset($_POST['naam'])){
 
-        $profilePicLoc = "/twitter/images/userIcon.png";
-        $bannerPicLoc = "/twitter/images/600x200.png";
+        if(strncmp($_POST['profileEdit'], "data", 4) === 0 ){
 
-        if($_POST['profileEdit'] != "http://barathdandu-com.stackstaging.com/twitter/images/userIcon.png"){
-
-            echo "profilepic";
+            //echo "profilepic";
             
             $data = $_POST['profileEdit'];
 
@@ -105,11 +102,16 @@ if(array_key_exists("email", $_SESSION) && $_SESSION['email']){
                 $profilePicLoc = $ech[1];
 
             }
+            ftp_close($conn_id); 
+        }else{
+            $str = $_POST['profileEdit'];
+            $tmp = (explode("com",$str));
+            $profilePicLoc = $tmp[2];
         }
 
-        if($_POST['bannerEdit'] != "http://barathdandu-com.stackstaging.com/twitter/images/600x200.png"){
+        if(strncmp($_POST['bannerEdit'], "data", 4) === 0){
 
-            echo "bannerpic";
+            //echo "bannerpic";
             
             $data = $_POST['bannerEdit'];
 
@@ -133,6 +135,11 @@ if(array_key_exists("email", $_SESSION) && $_SESSION['email']){
                 $bannerPicLoc = $ech[1];
 
             }
+            ftp_close($conn_id); 
+        }else{
+            $str = $_POST['bannerEdit'];
+            $tmp = (explode("com",$str));
+            $bannerPicLoc = $tmp[2];
         }
         
         $query = "UPDATE `twitter` SET `name`= '".mysqli_real_escape_string($link, $_POST['naam'])."',`description`= '".mysqli_real_escape_string($link, $_POST['bio'])."',`piclocation`= '".$profilePicLoc."',`bannerlocation`= '".$bannerPicLoc."' WHERE email = '".$_SESSION['email']."' LIMIT 1";
@@ -140,10 +147,10 @@ if(array_key_exists("email", $_SESSION) && $_SESSION['email']){
         //echo $query;
         
         if(mysqli_query($link, $query)){
-            echo "<div class='alert alert-success' role='alert'>You have been signed up!<br></div>";
+            echo "succ";
         }
         else{
-            echo "<div class='alert alert-danger' role='alert'>There was an error signing you up.<br> Please try again later</div>";
+            echo "fail";
         }
     }  
 }
