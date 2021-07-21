@@ -21,8 +21,8 @@
 
             $hash = password_hash($_POST['pass'], PASSWORD_DEFAULT);
 
-            $query = "INSERT INTO `twitter`(`email`, `password`) VALUES ('".mysqli_real_escape_string($link, $_POST['email'])."', 
-            '".mysqli_real_escape_string($link, $hash)."')";
+            $query = "INSERT INTO `twitter`(`email`, `password`, `joined`, `bannerlocation`) VALUES ('".mysqli_real_escape_string($link, $_POST['email'])."', 
+            '".mysqli_real_escape_string($link, $hash)."', '".$_POST['join']."', '/twitter/images/600x200.png' )";
 
             if(mysqli_query($link, $query)){
                 $error .= "<div class='alert alert-success' role='alert'>You have been signed up!<br></div>";
@@ -150,21 +150,30 @@
                     <input type="password"  class="form-control" name = "confpass" id="confPassword"placeholder="Confirm Password" value="<?php if (isset($_POST['confpass'])) echo $_POST['confpass']; ?>"/>
                     <div class="invalid-feedback">Password and confirm passwords do not match</div>
                 </div>
+                <input type="hidden" id = "joined" name = "join" value = "">
                 <div class="text-center mt-4">
                     <button type="submit" class="btn btn-primary" name = "sub" Value = "sb">Next</button>
                 </div>
-                <p class = "mt-4">Already have an account?  <a href="http://barathdandu-com.stackstaging.com/twitter/login.php" style="color:dodgerblue">Login</a>.</p>
+                <p class = "mt-4">Already have an account?<a href="http://barathdandu-com.stackstaging.com/twitter/login.php" style="color:dodgerblue">Login</a>.</p>
             </form>
         </div>
     </div>    
        <script type="text/javascript">
 
-       function emailCheck(){
+        const date = new Date(); 
+        const month = date.toLocaleString('default', { month: 'long' });
+        const year =  date.getFullYear();
+
+        var joined = month+" "+year;
+
+        document.getElementById("joined").value = joined;
+
+        function emailCheck(){
             if($("#Email").val()==""){
                 $("#Email").addClass('is-invalid');
                 return false;
             }else{
-                var regMail     =   /^([_a-zA-Z0-9-]+)(\.[_a-zA-Z0-9-]+)*@([a-zA-Z0-9-]+\.)+([a-zA-Z]{2,3})$/;
+                var regMail = /^([_a-zA-Z0-9-]+)(\.[_a-zA-Z0-9-]+)*@([a-zA-Z0-9-]+\.)+([a-zA-Z]{2,3})$/;
                 if(regMail.test($("#Email").val()) == false){
                     $("#Email").addClass('is-invalid');
                     return false;
@@ -173,7 +182,6 @@
                     $("#Email").addClass('is-valid');
                     return true;
                 }
-    
             }
         }
         function passwordCheck(){
@@ -208,7 +216,6 @@
             }
         });
         $("form").submit(function(e) {
-            
             if(emailCheck() != true || passwordCheck() != true || confpasswordCheck() != true){
                 e.preventDefault();
                 emailCheck();
