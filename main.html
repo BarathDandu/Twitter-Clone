@@ -441,7 +441,7 @@ a:hover{
     margin: 7vh auto ;
 }
 
-#setUpProfile{
+.setUpProfile{
     font-family: 'Work Sans', sans-serif;    
     font-weight: 900;
     font-size: 0.8vw;
@@ -454,7 +454,7 @@ a:hover{
     clear:both;
     float:right;
 }
-#setUpProfile:hover{
+.setUpProfile:hover{
     background: rgba(29, 161, 242, .1) ;
 }
 
@@ -516,10 +516,7 @@ a:hover{
 .followering:hover{
     text-decoration: underline;
     text-decoration-color: white;
-}
-
-.followering a{
-    color: white;
+    cursor: pointer;
 }
 
 .belowfollowering{
@@ -545,7 +542,8 @@ a:hover{
 
 <div class="container">
     
-    <div id = "centerLoadingRing" class="lds-dual-ring" style = "position: fixed; top:42%; left: 49%; z-index: 1051; display: none;"></div>
+    <div id = "centerLoadingRing" class="lds-dual-ring" style = "position: fixed; top:32%; left: 45.5%; z-index: 1051; display: none;"></div>
+    <div id = "ProfileUpLoadingRing" class="lds-dual-ring" style = "position: fixed; top:51%; left: 48.8%; z-index: 1051; display: none;"></div>
 
     <div class="row">
         <div class="col-3">
@@ -723,50 +721,51 @@ a:hover{
             <div id="<?php echo $username.'Div'?>" class = "profileDiv" style = "margin: 0; padding: 0;">
                
                 <div id="header" style = "margin: 0;padding: 0; border-bottom:1px solid rgba(110, 118, 125, 0.5) ;">
-                    <div class = "left-col" style=" padding: 0.7vh 1.3vh 1.2vh 1.3vh;margin: 0.4vh 1vh;">
+                    <div id = "backBtn" class = "left-col" style=" padding: 0.7vh 1.3vh 1.2vh 1.3vh;margin: 0.4vh 1vh;">
                         <img style = "height:1.5vh" src="http://barathdandu-com.stackstaging.com/twitter/images/backbutton.png" alt="Twitter">
                         <img style = "height:1.5vh" class = "hovlogo" src="http://barathdandu-com.stackstaging.com/twitter/images/backbuttonblue.png" alt="Twitter">
                     </div>
-                    <div class = "data" style = "margin:1vh 0.4vh 0.1h 0.4vh;padding: 0;">
-                        <span class="name" style = "margin:0vh;padding: 0;line-height: 2vh; font-size: 2.2vh;"> <?php echo $name ?></span> 
-                        <span class="usernametext" style = "margin:0vh;padding: 0;line-height: 1.7vh;">0 Tweets</span> 
+                    <div class = "data" style = "margin:1vh 0.4vh 0.1h 0.4vh;padding: 0;height:3.6vh ;">
+                        <span class="name nnn" style = "margin:0vh;margin-top:0.2vh;padding: 0;line-height: 2vh; font-size: 2.2vh;"> </span> 
+                        <span id="ttt" class="usernametext" style = "margin:0vh;padding: 0;line-height: 1.7vh;"></span> 
                     </div>  
                 </div>
-                <div>
-                    <img class = "profilepic" src="http://barathdandu-com.stackstaging.com<?php echo $piclocation ?>" > 
-                    <img src = "http://barathdandu-com.stackstaging.com<?php echo $bannerlocation ?>" style = "width:100%;">
-                </div>
-                <div >
-                    <input type = "button"  id = "setUpProfile" value = "Edit profile" data-toggle="modal" data-target="#setupprofilemodal" >
-                </div>
-                <div style = "float: left; clear: both; display: block; margin-left: 2vh; ">
-                    <span class="name" style="font-size: 2.2vh; margin: 0;line-height: 2vh;"> <?php echo $name ?></span> 
-                    <span class="usernametext" style="font-size: 1.4vh;margin-top: 0.9vh;"><?php echo '@'.$username ?></span> 
-                </div>
-                <div style = "float: left; clear: both; display: block; margin: 1.5vh 2vh 0 2vh; font-size: 1.6vh; "><?php echo $description ?></div>
-                <div style = "padding:0;float: left; clear: both; display: block; margin: 0.7vh 2vh 0 2vh; font-size: 1.6vh;  color: rgb(110,118,125);">
-                    <img src = "http://barathdandu-com.stackstaging.com/twitter/images/joined.png" style = "height:1.5vh;margin-bottom: 0.4vh;">
-                    Joined <?php echo $joined ?>
-                </div>
-                <div class = "followering" >
-                    <a href="https://www.w3schools.com">0 </a>Following
-                </div>
-                <div class = "followering" style = "clear: none; margin-bottom:1.5vh ;">
-                    <a href="https://www.w3schools.com">0 </a>Followers
-                </div>
-                <div style = "clear: both; display: block; width: 100%;" >
-                    <div id="0" class = "belowfollowering " style = "width: 25%;font-family: 'Work Sans', sans-serif; font-weight: 900;font-size: 1.5vh;">Tweets </div>
-                    <div id="1" class = "belowfollowering " style = "width: 30%;font-family: 'Work Sans', sans-serif; font-weight: 900;font-size: 1.5vh;">Tweets & replies</div>
-                    <div id="2" class = "belowfollowering " style = "width: 22.5%;font-family: 'Work Sans',sans-serif;font-weight: 900;font-size: 1.5vh;">Media</div>
-                    <div id="3" class = "belowfollowering " style = "width: 22.5%;font-family: 'Work Sans',sans-serif;font-weight: 900;font-size: 1.5vh;">Likes</div>
-                </div>
-                <div id="0UnderLine" style="display: none; clear:none;margin-top: 4.7vh; margin-left: 2.65vw; width: 9.5%; padding: 0; border-bottom: #1DA1F2 solid 0.5vh;border-radius: 3px;"></div>
-                <div id="1UnderLine" style="display: none;clear:none;margin-top: 4.7vh; margin-left: 10vw; width: 20%; padding: 0; border-bottom: #1DA1F2 solid 0.5vh;border-radius: 3px;"></div>
-                <div id="2UnderLine" style="display: none;clear:none;margin-top: 4.7vh; margin-left: 20.7vw; width: 8.5%; padding: 0; border-bottom: #1DA1F2 solid 0.5vh;border-radius: 3px;"></div>
-                <div id="3UnderLine" style="display: none;clear:none;margin-top: 4.7vh; margin-left: 28.4vw; width: 6.9%; padding: 0; border-bottom: #1DA1F2 solid 0.5vh;border-radius: 3px;"></div>
+                <div style = "display: none;" id = "accFound">
+                    <div>
+                        <img id="ppp" class = "profilepic" src="" > 
+                        <img id="bbb" src = "" style = "width:100%;">
+                    </div>
+                    <div >
+                        <input type = "button" style = "display: none;" id = "setUpProfile" class = "setUpProfile" value = "Edit profile" data-toggle="modal" data-target="#setupprofilemodal" >
+                        <input type = "button" style = "display: none;" id = "profileFollowBtn" class = "setUpProfile" value = "Follow">
+                    </div>
+                    <div style = "float: left; clear: both; display: block; margin-left: 2vh; ">
+                        <span class="name nnn" style="font-size: 2.2vh; margin: 0;line-height: 2vh;"> </span> 
+                        <span id="uuu" class="usernametext" style="font-size: 1.4vh;margin-top: 0.9vh;"></span> 
+                    </div>
+                    <div id="ddd" style = "float: left; clear: both; display: block; margin: 1.5vh 2vh 0 2vh; font-size: 1.6vh; "></div>
+                    <div id="jjj" style = "padding:0;float: left; clear: both; display: block; margin: 0.7vh 2vh 0 2vh; font-size: 1.6vh;  color: rgb(110,118,125);">
+                        
+                    </div>
+                    <div class = "followering" >
+                        <div id="iii" style = "clear: none;float: left;color:#fff;margin-right: 0.3vw;">0 </div> Following
+                    </div>
+                    <div class = "followering" style = "clear: none; float: left;margin-bottom:1.5vh ;">
+                        <div id="eee" style = "clear: none;float: left;color:#fff;margin-right: 0.3vw;">0 </div> Followers
+                    </div>
+                    <div style = "clear: both; display: block; width: 100%;" >
+                        <div id="0" class = "belowfollowering " style = "width: 25%;font-family: 'Work Sans', sans-serif; font-weight: 900;font-size: 1.5vh;">Tweets </div>
+                        <div id="1" class = "belowfollowering " style = "width: 30%;font-family: 'Work Sans', sans-serif; font-weight: 900;font-size: 1.5vh;">Tweets & replies</div>
+                        <div id="2" class = "belowfollowering " style = "width: 22.5%;font-family: 'Work Sans',sans-serif;font-weight: 900;font-size: 1.5vh;">Media</div>
+                        <div id="3" class = "belowfollowering " style = "width: 22.5%;font-family: 'Work Sans',sans-serif;font-weight: 900;font-size: 1.5vh;">Likes</div>
+                    </div>
+                    <div id="0UnderLine" style="display: none; clear:none;margin-top: 4.7vh; margin-left: 2.65vw; width: 9.5%; padding: 0; border-bottom: #1DA1F2 solid 0.5vh;border-radius: 3px;"></div>
+                    <div id="1UnderLine" style="display: none;clear:none;margin-top: 4.7vh; margin-left: 10vw; width: 20%; padding: 0; border-bottom: #1DA1F2 solid 0.5vh;border-radius: 3px;"></div>
+                    <div id="2UnderLine" style="display: none;clear:none;margin-top: 4.7vh; margin-left: 20.7vw; width: 8.5%; padding: 0; border-bottom: #1DA1F2 solid 0.5vh;border-radius: 3px;"></div>
+                    <div id="3UnderLine" style="display: none;clear:none;margin-top: 4.7vh; margin-left: 28.4vw; width: 6.9%; padding: 0; border-bottom: #1DA1F2 solid 0.5vh;border-radius: 3px;"></div>
 
-                <div style="margin: 0; width: 100%; padding: 0; border-bottom: rgba(110,118,125,0.5) solid 1px;"></div>
-
+                    <div style="margin: 0; width: 100%; padding: 0; border-bottom: rgba(110,118,125,0.5) solid 1px;"></div>
+                </div>
             </div>
         
             <div id="moreDiv">morediv</div>
@@ -898,14 +897,19 @@ a:hover{
         var getVar = "<?php echo $_GET['page'] ?>"; 
         var selectedButton = '';
         var initCallPage = '';
-        var selectedProfile = '';
+        var selectedProfile = 0;
+        var profileDivHTML = '';
         if(getVar == ''){
             initCallPage = "home";
             selectedButton = "#home";
             selectedDiv = "#homeDiv";
         }else{
             initCallPage = getVar.toLowerCase();
-            selectedButton = "#"+initCallPage;
+            if(initCallPage == "<?php echo $username?>" ){
+                selectedButton = "#"+"<?php echo $username?>";
+            }else{
+                selectedButton = "#"+initCallPage;
+            }
             const nonProfileDiv = ["home","explore", "notifications", "messages", "bookmarks", "lists", "more"];
             if(nonProfileDiv.includes(initCallPage)){
                 selectedDiv = "#"+initCallPage+"Div";
@@ -920,12 +924,11 @@ a:hover{
             $(document).attr("title", initCallPage.charAt(0).toUpperCase() + initCallPage.slice(1));
 
             jsonCall(initCallPage);
-            
+
             $(selectedButton).hide();
             $(selectedButton+"Pressed").show();
             $(selectedDiv).show();
 
-            selectedProfile = 0;
             document.getElementsByClassName("belowfollowering")[0].style.color = "#1da1f2";
             $("#0UnderLine").show();
 
@@ -934,6 +937,15 @@ a:hover{
             }
             if(currentBannerPic == "http://barathdandu-com.stackstaging.com/twitter/images/600x200.png"){
                 $("#selectPicCancel1").hide();
+            }
+
+            if(getVar == "<?php echo $username?>"){
+                $("#profileFollowBtn").hide();
+                $("#setUpProfile").show();
+            } 
+            else{
+                $("#profileFollowBtn").show();
+                $("#setUpProfile").hide();
             }
         
         });
@@ -948,6 +960,8 @@ a:hover{
 
             document.getElementsByClassName("belowfollowering")[selectedProfile].style.color = "#1da1f2";
             $("#"+selectedProfile+"UnderLine").show();
+            jsonCall(initCallPage);
+
         });
 
         window.addEventListener('popstate', function (event) {
@@ -981,11 +995,19 @@ a:hover{
             var str = "#"+this.id;
 
             if(!(str.includes(selectedButton))){
-            
                 prevSelected(selectedButton, selectedDiv);
                 var call_Page = this.id;
                 selectedButton = "#" + this.id;
                 selectedDiv = "#" + this.id + "Div";
+
+                if(this.id == "<?php echo $username?>"){
+                    $("#profileFollowBtn").hide();
+                    $("#setUpProfile").show();
+                } 
+                else{
+                    $("#profileFollowBtn").show();
+                    $("#setUpProfile").hide();
+                }
 
                 $(selectedButton).hide();
                 $(selectedButton+"Pressed").show()
@@ -998,39 +1020,73 @@ a:hover{
             }
         });
 
+        function circleUnLoading(ringID,dimmedID){
+            $("#"+ringID).hide();
+            $(dimmedID).css('opacity', '1');
+        }
+
         function jsonCall(call_Page){
             //alert(call_Page);
+            $("#centerLoadingRing").show();
+            $('.profileDiv').css('opacity', '0.5');
             if(call_Page == "home"){
                 $.getJSON("http://barathdandu-com.stackstaging.com/twitter/ajax.php", {call_Page: call_Page}, function(data, textStatus, xhr){
                     console.log(data);
+                    circleUnLoading("centerLoadingRing", ".profileDiv");
                 });
             }else if(call_Page == "explore"){
                 $.getJSON("http://barathdandu-com.stackstaging.com/twitter/ajax.php", {call_Page: call_Page}, function(data, textStatus, xhr){
                     console.log(data);
+                    circleUnLoading("centerLoadingRing", ".profileDiv");
                 });
             }else if(call_Page == "notifications"){
                 $.getJSON("http://barathdandu-com.stackstaging.com/twitter/ajax.php", {call_Page: call_Page}, function(data, textStatus, xhr){
                     console.log(data);
+                    circleUnLoading("centerLoadingRing", ".profileDiv");
                 });
             }else if(call_Page == "messages"){
                 $.getJSON("http://barathdandu-com.stackstaging.com/twitter/ajax.php", {call_Page: call_Page}, function(data, textStatus, xhr){
                     console.log(data);
+                    circleUnLoading("centerLoadingRing", ".profileDiv");
                 });
             }else if(call_Page == "bookmarks"){
                 $.getJSON("http://barathdandu-com.stackstaging.com/twitter/ajax.php", {call_Page: call_Page}, function(data, textStatus, xhr){
+                    circleUnLoading("centerLoadingRing", ".profileDiv");
                     console.log(data);
                 });
             }else if(call_Page == "lists"){
                 $.getJSON("http://barathdandu-com.stackstaging.com/twitter/ajax.php", {call_Page: call_Page}, function(data, textStatus, xhr){
                     console.log(data);
+                    circleUnLoading("centerLoadingRing", ".profileDiv");
                 });
             }else if(call_Page == "more"){
                 $.getJSON("http://barathdandu-com.stackstaging.com/twitter/ajax.php", {call_Page: call_Page}, function(data, textStatus, xhr){
                     console.log(data);
+                    circleUnLoading("centerLoadingRing", ".profileDiv");
                 });
             }else{
-                $.getJSON("http://barathdandu-com.stackstaging.com/twitter/ajax.php", {call_Page: call_Page}, function(data, textStatus, xhr){
+                $.getJSON("http://barathdandu-com.stackstaging.com/twitter/ajax.php", {call_Page: call_Page, bar:selectedProfile}, function(data, textStatus, xhr){
                     console.log(data);
+                    circleUnLoading("centerLoadingRing", ".profileDiv");
+                    if(data.data == 69){
+                        profileDivHTML = $("#accFound").html();
+                        $("#accFound").html("<h3 style = 'margin:2vh;color:#6E767D'>This account does not exist</h3>");
+                        $("#accFound").show();       
+                    }else{
+                        if(profileDivHTML != ''){
+                            $("#accFound").html(profileDivHTML);
+                        }
+                        $("#accFound").show();       
+                        $(".nnn").html(data.name);
+                        $("#ttt").html(data.tweetcount+" Tweets");
+                        $("#ppp").attr("src","http://barathdandu-com.stackstaging.com" + data.piclocation);
+                        $("#bbb").attr("src","http://barathdandu-com.stackstaging.com" + data.bannerlocation);
+                        $("#uuu").html("@"+call_Page);
+                        $("#ddd").html(data.description);
+                        $("#jjj").html('<img src = "http://barathdandu-com.stackstaging.com/twitter/images/joined.png" style = "height:1.5vh;margin-bottom: 0.4vh;">'+" Joined "+ data.joined);
+                        $("#iii").html(data.followingcount+" ");
+                        $("#eee").html(data.followercount+" ");
+                    }
                 });
             }
         }
@@ -1187,7 +1243,7 @@ a:hover{
             }
             if(nameerror == 0){
                
-                $("#centerLoadingRing").show();
+                $("#ProfileUpLoadingRing").show();
                 srcEncodedProfilePic = profilepicedit.src;
                 srcEncodedBannerPic = bannerPicEdit.src;
                 //alert($('#textAreaid').val());
@@ -1198,7 +1254,7 @@ a:hover{
                     success:function(data)
                     {
                         if(data == "succ"){
-                            $("#centerLoadingRing").hide();
+                            $("#ProfileUpLoadingRing").hide();
                             location.reload();  
                         }
                     },
@@ -1350,6 +1406,24 @@ a:hover{
             
         $(document).on("click", "#funcid", function () {
             $(this).parents(".popover").popover('hide');
+        });
+
+        $("#backBtn").click(function(e){
+            e.preventDefault(); 
+
+            prevSelected("#"+"<?php echo $username?>" , ".profileDiv");
+            var call_Page = this.id;
+            selectedButton = "#home";
+            selectedDiv = "#homeDiv";
+
+            $(selectedButton).hide();
+            $(selectedButton+"Pressed").show()
+            $(selectedDiv).show();
+
+            window.history.pushState("","","http://barathdandu-com.stackstaging.com/twitter/home");
+            $(document).attr("title", "Home");
+            
+            jsonCall("home");
         });
 
     </script>

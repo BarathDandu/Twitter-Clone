@@ -35,7 +35,7 @@ if($_GET['name']=='lauda'){
             die("Error connecting to Database");
         }
     
-        $query = "SELECT `name`, `username`, `piclocation`,`bannerlocation`,`description`, `joined` FROM `twitter` WHERE email = '".mysqli_real_escape_string($link, $_SESSION['email'])."' LIMIT 1";
+        $query = "SELECT `name`, `username`, `piclocation`,`bannerlocation` FROM `twitter` WHERE email = '".mysqli_real_escape_string($link, $_SESSION['email'])."' LIMIT 1";
     
         $row = mysqli_fetch_array(mysqli_query($link, $query));
     
@@ -46,10 +46,6 @@ if($_GET['name']=='lauda'){
         $piclocation .= $row['piclocation'];
             
         $bannerlocation .= $row['bannerlocation'];
-        
-        $description .= $row['description'];
-
-        $joined .= $row['joined'];
 
     }else{
         header("Location: http://barathdandu-com.stackstaging.com/twitter/welcome.php"); 

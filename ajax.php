@@ -53,24 +53,26 @@
                 die("Error connecting to Database");
             }
 
-            $query = "SELECT `name`, `piclocation` FROM `twitter` WHERE username = '".$callPage."' LIMIT 1";
+            $query = "SELECT `name`, `piclocation`, `bannerlocation`, `description`, `joined`, `tweetcount`, `followingcount`, `followercount` FROM `twitter` WHERE username = '".$callPage."' LIMIT 1";
             
             if($row = mysqli_fetch_array(mysqli_query($link, $query))){
-                $piclocation .= $row['piclocation'];
-                $name .= $row['name'];
-            }
-
-            if(array_key_exists("0", $row) && $row['0']){
-                echo json_encode(array(
-                    'name' => $name,
-                    'data'=> $piclocation
-                ));
-                
+                if(array_key_exists("0", $row) && $row['0']){
+                    echo json_encode(array(
+                        'name' => $row['name'],
+                        'piclocation'=> $row['piclocation'],
+                        'bannerlocation'=>$row['bannerlocation'] ,
+                        'description'=>$row['description'] ,
+                        'joined'=>$row['joined'],
+                        'tweetcount'=>$row['tweetcount'],
+                        'followingcount'=>$row['followingcount'],
+                        'followercount'=>$row['followercount']
+                    ));
+                } 
             }else{
                 echo json_encode(array(
-                    'data'=>'This account doesn’t exist, Try searching for another.'
+                    'data'=>69
                 ));      
             } 
-        }   
+        }
     }
 ?>
