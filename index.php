@@ -35,9 +35,11 @@ if($_GET['name']=='lauda'){
             die("Error connecting to Database");
         }
     
-        $query = "SELECT `name`, `username`, `piclocation`,`bannerlocation` FROM `twitter` WHERE email = '".mysqli_real_escape_string($link, $_SESSION['email'])."' LIMIT 1";
+        $query = "SELECT `id`, `name`, `username`, `piclocation`,`bannerlocation` FROM `twitter` WHERE email = '".mysqli_real_escape_string($link, $_SESSION['email'])."' LIMIT 1";
     
         $row = mysqli_fetch_array(mysqli_query($link, $query));
+
+        $id .= $row['id'];
     
         $username .= $row['username'];
         

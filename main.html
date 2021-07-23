@@ -737,7 +737,7 @@ a:hover{
                     </div>
                     <div >
                         <input type = "button" style = "display: none;" id = "setUpProfile" class = "setUpProfile" value = "Edit profile" data-toggle="modal" data-target="#setupprofilemodal" >
-                        <input type = "button" style = "display: none;" id = "profileFollowBtn" class = "setUpProfile" value = "Follow">
+                        <input type = "button" style = "display: none;" id = "profileFollowBtn" data-id="" data-name="" data-username="" data-picloc="" data-bio="" class = "setUpProfile" value = "Follow">
                     </div>
                     <div style = "float: left; clear: both; display: block; margin-left: 2vh; ">
                         <span class="name nnn" style="font-size: 2.2vh; margin: 0;line-height: 2vh;"> </span> 
@@ -747,10 +747,10 @@ a:hover{
                     <div id="jjj" style = "padding:0;float: left; clear: both; display: block; margin: 0.7vh 2vh 0 2vh; font-size: 1.6vh;  color: rgb(110,118,125);">
                         
                     </div>
-                    <div class = "followering" >
+                    <div id="fffeee" class = "followering" >
                         <div id="iii" style = "clear: none;float: left;color:#fff;margin-right: 0.3vw;">0 </div> Following
                     </div>
-                    <div class = "followering" style = "clear: none; float: left;margin-bottom:1.5vh ;">
+                    <div id="fffiii" class = "followering" style = "clear: none; float: left;margin-bottom:1.5vh ;">
                         <div id="eee" style = "clear: none;float: left;color:#fff;margin-right: 0.3vw;">0 </div> Followers
                     </div>
                     <div style = "clear: both; display: block; width: 100%;" >
@@ -767,7 +767,22 @@ a:hover{
                     <div style="margin: 0; width: 100%; padding: 0; border-bottom: rgba(110,118,125,0.5) solid 1px;"></div>
                 </div>
             </div>
-        
+
+            <div id = "followDiv" style = "display: none;">
+
+                <div id="header" style = "margin: 0;padding: 0; border-bottom:1px solid rgba(110, 118, 125, 0.5) ;">
+                    <div id = "backBtnfff" class = "left-col" style=" padding: 0.7vh 1.3vh 1.2vh 1.3vh;margin: 0.4vh 1vh;">
+                        <img style = "height:1.5vh" src="http://barathdandu-com.stackstaging.com/twitter/images/backbutton.png" alt="Twitter">
+                        <img style = "height:1.5vh" class = "hovlogo" src="http://barathdandu-com.stackstaging.com/twitter/images/backbuttonblue.png" alt="Twitter">
+                    </div>
+                    <div class = "data" style = "margin:1vh 0.4vh 0.1h 0.4vh;padding: 0;height:3.6vh ;">
+                        <span class="name nnn" style = "margin:0vh;margin-top:0.2vh;padding: 0;line-height: 2vh; font-size: 2.2vh;"> </span> 
+                        <span class="usernametext" style = "margin:0vh;padding: 0;line-height: 1.7vh;"><?php echo '@'.$username ?></span> 
+                    </div>  
+                </div>
+
+            </div>
+            
             <div id="moreDiv">morediv</div>
 
         </div>
@@ -950,6 +965,27 @@ a:hover{
         
         });
 
+        $("#profileFollowBtn").click(function(e){
+            e.preventDefault(); 
+            //alert($(this).data("name")+" "+ $(this).data("username")+" "+ $(this).data("picloc")+" "+ $(this).data("bio"));
+            //alert($(this).data('id'));
+            //alert('<?php echo $id?>')
+            $.ajax({
+                    url:'http://barathdandu-com.stackstaging.com/twitter/upload.php/',
+                    method:'POST',
+                    data:{followedID: $(this).data('id'), followerID: '<?php echo $id?>' },
+                    success:function(data)
+                    {
+                        alert(data);
+                    },
+                    error: function(xhr, status, error) {
+                        var err = eval("(" + xhr.responseText + ")");
+                        alert(err.Message);
+                    }
+                }); 
+
+        });
+
         $(".belowfollowering").click(function(e){
             e.preventDefault(); 
             //alert(this.id);
@@ -1015,7 +1051,7 @@ a:hover{
                 
                 window.history.pushState("","","http://barathdandu-com.stackstaging.com/twitter/"+ this.id);
                 $(document).attr("title", (this.id).charAt(0).toUpperCase() + (this.id).slice(1));
-                
+                initCallPage = this.id;
                 jsonCall(this.id);
             }
         });
@@ -1024,6 +1060,18 @@ a:hover{
             $("#"+ringID).hide();
             $(dimmedID).css('opacity', '1');
         }
+
+        $("#fffiii").click(function(e){
+            e.preventDefault(); 
+            $(".profileDiv").hide();
+            $("#followDiv").show();
+        });
+
+        $("#fffeee").click(function(e){
+            e.preventDefault(); 
+            $(".profileDiv").hide();
+            $("#followDiv").show();
+        });
 
         function jsonCall(call_Page){
             //alert(call_Page);
@@ -1086,6 +1134,11 @@ a:hover{
                         $("#jjj").html('<img src = "http://barathdandu-com.stackstaging.com/twitter/images/joined.png" style = "height:1.5vh;margin-bottom: 0.4vh;">'+" Joined "+ data.joined);
                         $("#iii").html(data.followingcount+" ");
                         $("#eee").html(data.followercount+" ");
+                        $('#profileFollowBtn').data('id', data.id);
+                        $('#profileFollowBtn').data('name', data.name);
+                        $('#profileFollowBtn').data('username', call_Page);
+                        $('#profileFollowBtn').data('picloc', data.piclocation);
+                        $('#profileFollowBtn').data('bio', data.description);
                     }
                 });
             }
@@ -1424,6 +1477,17 @@ a:hover{
             $(document).attr("title", "Home");
             
             jsonCall("home");
+        });
+
+        $("#backBtnfff").click(function(e){
+            e.preventDefault(); 
+
+            $("#followDiv").hide();
+            $(".profileDiv").show();
+
+            $(document).attr("title", "Followers/Following");
+            
+            jsonCall(initCallPage);
         });
 
     </script>

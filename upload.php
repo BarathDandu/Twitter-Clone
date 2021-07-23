@@ -152,6 +152,21 @@ if(array_key_exists("email", $_SESSION) && $_SESSION['email']){
         else{
             echo "fail";
         }
-    }  
+    }
+    else if(isset($_POST['followedID'])){
+        
+        $query = "INSERT IGNORE INTO `followering`(`followedID`, `followerID`) VALUES  (".$_POST['followedID'].",".$_POST['followerID'].")";
+        
+        if(mysqli_query($link, $query)){
+            echo "succ Lol";
+        }
+        else{
+            echo "fail";
+        }
+
+    }
 }
+
+
+
 ?>

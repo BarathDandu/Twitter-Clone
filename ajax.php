@@ -53,11 +53,13 @@
                 die("Error connecting to Database");
             }
 
-            $query = "SELECT `name`, `piclocation`, `bannerlocation`, `description`, `joined`, `tweetcount`, `followingcount`, `followercount` FROM `twitter` WHERE username = '".$callPage."' LIMIT 1";
+            $query = "SELECT `id`, `name`, `description`, `piclocation`, `bannerlocation`, `followercount`, `followingcount`, `tweetcount`, `joined` FROM `twitter` WHERE username = '".$callPage."' LIMIT 1";
             
             if($row = mysqli_fetch_array(mysqli_query($link, $query))){
                 if(array_key_exists("0", $row) && $row['0']){
                     echo json_encode(array(
+                        'bar'=>  $_GET['bar'],
+                        'id' => $row['id'],
                         'name' => $row['name'],
                         'piclocation'=> $row['piclocation'],
                         'bannerlocation'=>$row['bannerlocation'] ,
